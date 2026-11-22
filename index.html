@@ -3,22 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="五上语文">
+<meta name="theme-color" content="#f6f4ef">
 <title>五年级上册语文 · 在线练习</title>
 <style>
 :root{
   --ink:#1f2328; --sub:#5b6470; --line:#e3e6ea; --bg:#f6f4ef; --card:#fff;
   --red:#9e2b25; --red2:#c0392b; --green:#1a7f4b; --green-bg:#e9f6ef;
-  --red-bg:#fdecea; --amber:#8a5a12; --amber-bg:#fdf3e2;
+  --red-bg:#fdecea; --amber:#8a5a12; --amber-bg:#fdf3e2; --blue:#1f4e79;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--ink);
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
-  line-height:1.7;font-size:16px}
-header{position:sticky;top:0;z-index:20;background:rgba(246,244,239,.94);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.hd{max-width:880px;margin:0 auto;padding:10px 16px 8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.hd h1{font-size:17px;margin:0;font-weight:700;letter-spacing:.5px}
-.hd .tag{font-size:12px;color:var(--sub);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+  line-height:1.7;font-size:16px;padding-bottom:env(safe-area-inset-bottom)}
+header{position:sticky;top:0;z-index:30;background:rgba(246,244,239,.96);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.hd{max-width:880px;margin:0 auto;padding:10px 16px 6px;display:flex;align-items:center;gap:10px}
+.hd h1{font-size:17px;margin:0;font-weight:800;letter-spacing:.4px}
 .hd .sp{flex:1}
 .hd button{font:inherit;font-size:13px;border:1px solid var(--line);background:#fff;color:var(--sub);
   border-radius:8px;padding:5px 10px;cursor:pointer}
@@ -26,261 +30,627 @@ nav{max-width:880px;margin:0 auto;padding:0 16px 10px;display:flex;gap:8px;overf
 nav::-webkit-scrollbar{display:none}
 nav button{white-space:nowrap;font:inherit;font-size:14px;border:1px solid var(--line);
   background:#fff;color:var(--sub);border-radius:999px;padding:6px 14px;cursor:pointer}
-nav button.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
-main{max-width:880px;margin:0 auto;padding:16px 16px 80px}
-.sec-title{font-size:19px;font-weight:800;margin:18px 0 4px;color:var(--red)}
-.sec-tip{font-size:13px;color:var(--sub);margin:0 0 14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px;margin:0 0 14px}
-.qno{font-weight:700;color:var(--red);margin-right:6px}
-.q{font-size:16px;margin:0 0 10px;white-space:pre-wrap}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;
-  padding:9px 12px;cursor:pointer;background:#fcfcfb;transition:.15s}
-.opt:hover{border-color:#c9ccd2}
-.opt .k{font-weight:700;color:var(--sub);min-width:18px}
+nav button.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+main{max-width:880px;margin:0 auto;padding:16px 16px 96px}
+h2.t{font-size:19px;font-weight:800;margin:6px 0 4px;color:var(--red)}
+p.tip{font-size:13px;color:var(--sub);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:0 0 12px}
+.fld{margin:0 0 14px}
+.fld>label{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:0 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;max-height:260px;overflow-y:auto;padding:2px}
+.chip{font-size:13.5px;border:1px solid var(--line);background:#fcfcfb;color:var(--ink);
+  border-radius:999px;padding:7px 13px;cursor:pointer;user-select:none;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.chip small{opacity:.7;margin-left:4px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{flex:1 1 auto;min-width:86px;font:inherit;font-size:14px;border:1px solid var(--line);
+  background:#fcfcfb;color:var(--sub);padding:10px 8px;cursor:pointer;border-radius:10px}
+.seg button.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+.seg button:disabled{opacity:.4}
+#seg-group button{flex:0 1 auto}
+select{font:inherit;font-size:15px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;
+  background:#fcfcfb;width:100%}
+button.primary{font:inherit;font-size:16px;font-weight:800;background:var(--red);color:#fff;border:0;
+  border-radius:12px;padding:13px 20px;width:100%;cursor:pointer;letter-spacing:1px}
+button.primary:disabled{opacity:.45}
+button.ghost{font:inherit;font-size:14px;background:#fff;color:var(--sub);border:1px solid var(--line);
+  border-radius:10px;padding:9px 16px;cursor:pointer}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.bar{height:6px;border-radius:99px;background:#e8e5df;overflow:hidden;margin:0 0 12px}
+.bar i{display:block;height:100%;background:var(--red);width:0;transition:.25s}
+.pstat{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);margin-bottom:6px}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;color:var(--ink)}
+.timer.warn{color:var(--red2)}
+.passage{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.passage summary{font-weight:700;font-size:13.5px;color:var(--sub);cursor:pointer;list-style:none}
+.passage summary::-webkit-details-marker{display:none}
+.passage summary::before{content:"▸ ";color:var(--red)}
+.passage[open] summary::before{content:"▾ "}
+.passage .body{max-height:42vh;overflow:auto;margin-top:8px}
+.passage p{margin:0 0 8px;text-indent:2em;font-size:15px}
+.q{font-size:17px;margin:0 0 12px;white-space:pre-wrap;font-weight:600;line-height:1.65}
+.qno{color:var(--red);margin-right:6px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;
+  padding:11px 13px;cursor:pointer;background:#fcfcfb;transition:.15s;font-size:15.5px}
+.opt:active{transform:scale(.995)}
+.opt .k{font-weight:800;color:var(--sub);min-width:18px}
 .opt.sel{border-color:var(--red);background:#fdf6f5}
 .opt.right{border-color:var(--green);background:var(--green-bg)}
 .opt.wrong{border-color:var(--red2);background:var(--red-bg)}
-input.fill{width:100%;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fcfcfb}
-input.fill:focus{outline:none;border-color:var(--red)}
-textarea.open{width:100%;min-height:64px;font:inherit;padding:9px 12px;border:1px solid var(--line);
-  border-radius:10px;background:#fcfcfb;resize:vertical}
-.fb{font-size:13.5px;margin-top:8px;padding:8px 10px;border-radius:8px;display:none;white-space:pre-wrap}
+input.fill{width:100%;font:inherit;font-size:16px;padding:12px 13px;border:1px solid var(--line);
+  border-radius:11px;background:#fcfcfb}
+textarea.open{width:100%;min-height:90px;font:inherit;font-size:15.5px;padding:11px 13px;
+  border:1px solid var(--line);border-radius:11px;background:#fcfcfb;resize:vertical}
+.fb{font-size:14px;margin-top:10px;padding:9px 11px;border-radius:9px;display:none;white-space:pre-wrap;line-height:1.6}
 .fb.show{display:block}
 .fb.ok{background:var(--green-bg);color:var(--green)}
 .fb.no{background:var(--red-bg);color:#a2231b}
 .fb.ref{background:var(--amber-bg);color:var(--amber)}
-.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
-button.primary{font:inherit;font-size:15px;font-weight:700;background:var(--red);color:#fff;border:0;
-  border-radius:10px;padding:10px 20px;cursor:pointer}
-button.ghost{font:inherit;font-size:14px;background:#fff;color:var(--sub);border:1px solid var(--line);
-  border-radius:10px;padding:9px 16px;cursor:pointer}
-.score{font-size:15px;font-weight:700;margin:8px 0 0;color:var(--red)}
-.passage{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
-.passage h3{margin:0 0 10px;font-size:17px}
-.passage p{margin:0 0 10px;text-indent:2em}
-.passage .from{font-size:12.5px;color:var(--sub);text-align:right;margin:0}
-.empty{color:var(--sub);text-align:center;padding:40px 0}
-.bar{height:6px;border-radius:99px;background:#e8e5df;overflow:hidden;margin:10px 0 4px}
-.bar i{display:block;height:100%;background:var(--red);width:0;transition:.3s}
-.stat{font-size:13px;color:var(--sub)}
-footer{max-width:880px;margin:0 auto;padding:0 16px 40px;font-size:12.5px;color:var(--sub)}
-@media (max-width:520px){body{font-size:15.5px}.card{padding:14px 13px 10px}}
+.res{display:flex;gap:10px;text-align:center;margin:6px 0 16px}
+.res div{flex:1;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 6px}
+.res b{display:block;font-size:24px;color:var(--red);font-weight:800}
+.res span{font-size:12px;color:var(--sub)}
+.rlist{font-size:14px}
+.ritem{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.ritem:last-child{border-bottom:0}
+.ritem .mark{font-weight:800;width:20px;flex:none}
+.ritem.ok .mark{color:var(--green)}
+.ritem.no .mark{color:var(--red2)}
+.ritem .txt{flex:1;color:var(--ink)}
+.ritem .ans{font-size:12.5px;color:var(--sub);margin-top:2px}
+.hist{font-size:13.5px;color:var(--sub);padding:6px 0;border-bottom:1px dashed var(--line)}
+.empty{color:var(--sub);text-align:center;padding:44px 10px;font-size:15px}
+footer{max-width:880px;margin:0 auto;padding:0 16px 30px;font-size:12.5px;color:var(--sub)}
+@media (max-width:520px){body{font-size:15.5px}.card{padding:12px 13px}.q{font-size:16.5px}}
 </style>
 </head>
 <body>
 <header>
   <div class="hd">
-    <h1>五上语文 · 在线练习</h1>
-    <span class="tag">2026 秋新版</span>
+    <h1 id="title">五上语文 · 在线练习</h1>
     <span class="sp"></span>
-    <button id="btn-reset">清空重做</button>
+    <button id="btn-reset">清空记录</button>
   </div>
   <nav id="tabs"></nav>
 </header>
 <main id="main"></main>
-<footer>
-  题目与答案仅供练习使用；主观题请对照参考答案自评。<br>
-  答题记录保存在本机浏览器里，换设备或清理缓存会丢失。
-</footer>
+<footer>题目与答案为练习用；主观题请对照参考答案自评。记录保存在本机浏览器，换设备不同步。</footer>
 <script>
 const DATA = {"title": "五上语文 · 在线练习", "sections": [{"id": "pinyin", "title": "一、看拼音写词语", "tip": "把词语写在括号里，注意“慕、榨、箩、疆”等字的写法。", "items": [{"q": "gāo bǐng", "type": "fill", "a": "糕饼", "e": "《桂花雨》", "options": []}, {"q": "luó kuāng", "type": "fill", "a": "箩筐", "e": "《桂花雨》", "options": []}, {"q": "chén jìn", "type": "fill", "a": "沉浸", "e": "《桂花雨》", "options": []}, {"q": "fēn fù", "type": "fill", "a": "吩咐", "e": "《落花生》", "options": []}, {"q": "zhà yóu", "type": "fill", "a": "榨油", "e": "《落花生》", "options": []}, {"q": "ài mù", "type": "fill", "a": "爱慕", "e": "《落花生》", "options": []}, {"q": "chuí màn", "type": "fill", "a": "垂蔓", "e": "《珍珠鸟》", "options": []}, {"q": "cōng lóng", "type": "fill", "a": "葱茏", "e": "《珍珠鸟》", "options": []}, {"q": "chú niǎo", "type": "fill", "a": "雏鸟", "e": "《珍珠鸟》", "options": []}, {"q": "xìn lài", "type": "fill", "a": "信赖", "e": "《珍珠鸟》", "options": []}, {"q": "qīn lüè", "type": "fill", "a": "侵略", "e": "《冀中的地道战》", "options": []}, {"q": "bǎo lěi", "type": "fill", "a": "堡垒", "e": "《冀中的地道战》", "options": []}, {"q": "yǐn bì", "type": "fill", "a": "隐蔽", "e": "《冀中的地道战》", "options": []}, {"q": "wán bì guī zhào", "type": "fill", "a": "完璧归赵", "e": "《将相和》", "options": []}, {"q": "fù jīng qǐng zuì", "type": "fill", "a": "负荆请罪", "e": "《将相和》", "options": []}, {"q": "mí màn", "type": "fill", "a": "弥漫", "e": "《“诺曼底号”遇难记》", "options": []}, {"q": "jǐng rán yǒu xù", "type": "fill", "a": "井然有序", "e": "《“诺曼底号”遇难记》", "options": []}, {"q": "chóu xiè", "type": "fill", "a": "酬谢", "e": "《猎人海力布》", "options": []}, {"q": "dīng zhǔ", "type": "fill", "a": "叮嘱", "e": "《猎人海力布》", "options": []}, {"q": "bēng tā", "type": "fill", "a": "崩塌", "e": "《猎人海力布》", "options": []}, {"q": "bù kě gū liáng", "type": "fill", "a": "不可估量", "e": "《圆明园的毁灭》", "options": []}, {"q": "xiāo huǐ", "type": "fill", "a": "销毁", "e": "《圆明园的毁灭》", "options": []}, {"q": "zhèn ěr yù lóng", "type": "fill", "a": "震耳欲聋", "e": "《慈母情深》", "options": []}, {"q": "jūn liè", "type": "fill", "a": "龟裂", "e": "《慈母情深》", "options": []}, {"q": "bàn lǚ", "type": "fill", "a": "伴侣", "e": "《走遍天下书为侣》", "options": []}, {"q": "jīn jīn yǒu wèi", "type": "fill", "a": "津津有味", "e": "《忆读书》", "options": []}]}, {"id": "yin", "title": "二、字音辨析", "tip": "选出读音全部正确的一项。", "items": [{"q": "“箩筐”的“箩”读音是", "type": "choice", "options": ["nuó", "luó", "luō"], "a": 1, "e": "箩 luó，竹字头。"}, {"q": "“沉浸”的“浸”读音是", "type": "choice", "options": ["jǐn", "qìn", "jìn"], "a": 2, "e": "浸 jìn，氵旁。"}, {"q": "“榨油”的“榨”读音是", "type": "choice", "options": ["zhá", "zhà", "zà"], "a": 1, "e": "榨 zhà。"}, {"q": "“爱慕”的“慕”读音是", "type": "choice", "options": ["mǔ", "mù", "mò"], "a": 1, "e": "慕 mù。"}, {"q": "“雏鸟”的“雏”读音是", "type": "choice", "options": ["chǔ", "zōu", "chú"], "a": 2, "e": "雏 chú。"}, {"q": "“垂蔓”的“蔓”在词中读", "type": "choice", "options": ["mán", "màn", "wàn"], "a": 2, "e": "垂蔓 wàn，指细长能攀缘的茎。"}, {"q": "“万马齐喑”的“喑”读", "type": "choice", "options": ["yīn", "àn", "yìn"], "a": 0, "e": "喑 yīn，沉默。"}, {"q": "“干将发硎”的“硎”读", "type": "choice", "options": ["xíng", "xìng", "kēng"], "a": 0, "e": "硎 xíng，磨刀石。"}, {"q": "“地履其黄”的“履”读", "type": "choice", "options": ["fù", "lǚ", "lǔ"], "a": 1, "e": "履 lǚ，踩、踏。"}, {"q": "“山居秋暝”的“暝”读", "type": "choice", "options": ["mǐng", "mìng", "míng"], "a": 2, "e": "暝 míng，日暮。"}, {"q": "“浣女”的“浣”读", "type": "choice", "options": ["huǎn", "huàn", "wán"], "a": 1, "e": "浣 huàn，洗。"}, {"q": "“龟裂”的“龟”读", "type": "choice", "options": ["qiū", "guī", "jūn"], "a": 2, "e": "龟裂 jūn liè，裂开。"}, {"q": "“嗜好”的“嗜”读", "type": "choice", "options": ["shǐ", "sì", "shì"], "a": 2, "e": "嗜 shì。"}, {"q": "“矞矞皇皇”的“矞”读", "type": "choice", "options": ["yù", "jú", "yǔ"], "a": 0, "e": "矞 yù。"}, {"q": "“拣”在“拣麦穗”中读", "type": "choice", "options": ["liǎn", "jiàn", "jiǎn"], "a": 2, "e": "拣 jiǎn，挑选。"}, {"q": "下列加点字读音有误的一项是", "type": "choice", "options": ["雏鸟（chú）", "箩筐（luó）", "爱慕（mò）"], "a": 2, "e": "“慕”读 mù，不是 mò。"}]}, {"id": "zi", "title": "三、字形辨析（找出并改正错别字）", "tip": "每组有一个错别字，写出正确的字。", "items": [{"q": "完壁归赵（　）", "type": "fill", "a": "璧", "e": "下面是“玉”，和氏璧是玉。", "options": []}, {"q": "负径请罪（　）", "type": "fill", "a": "荆", "e": "“荆”是荆条，草字头。", "options": []}, {"q": "抖搜精神（　）", "type": "fill", "a": "擞", "e": "抖擞，提手旁。", "options": []}, {"q": "不可估谅（　）", "type": "fill", "a": "量", "e": "估量，下面是“里”。", "options": []}, {"q": "震耳欲聋（　）", "type": "fill", "a": "震", "e": "“震”是雨字头，“振”是提手旁。", "options": []}, {"q": "龟列（　）", "type": "fill", "a": "裂", "e": "龟裂，裂开。", "options": []}, {"q": "吩付（　）", "type": "fill", "a": "咐", "e": "吩咐，口字旁。", "options": []}, {"q": "爱幕（　）", "type": "fill", "a": "慕", "e": "爱慕，下面是“⺗”。", "options": []}, {"q": "慢山遍野（　）", "type": "fill", "a": "漫", "e": "漫山遍野：到处都是。", "options": []}, {"q": "迫不急待（　）", "type": "fill", "a": "及", "e": "迫不及待：急迫得不能再等待。", "options": []}, {"q": "慢浪诵读（　）", "type": "fill", "a": "漫", "e": "漫浪：随随便便。", "options": []}, {"q": "无病呻呤（　）", "type": "fill", "a": "吟", "e": "呻吟，口字旁。", "options": []}, {"q": "正重其事（　）", "type": "fill", "a": "郑", "e": "郑重其事：严肃认真。", "options": []}]}, {"id": "ci", "title": "四、词语运用", "tip": "成语、近反义词、词语搭配。", "items": [{"q": "下列成语全部出自第一单元“日积月累”的一组是", "type": "choice", "options": ["太平盛世、国泰民安、夜不闭户", "卧虎藏龙、鹤立鸡群、抱头鼠窜", "守株待兔、刻舟求剑、画蛇添足"], "a": 1, "e": "第一单元日积月累是动物成语。"}, {"q": "“如虎添翼”的意思是", "type": "choice", "options": ["比喻强大的更加强大", "形容逃跑得很快", "比喻隐藏着人才"], "a": 0, "e": "如虎添翼：强上加强。"}, {"q": "“鼠目寸光”是", "type": "choice", "options": ["中性词", "贬义词", "褒义词"], "a": 1, "e": "形容目光短浅，含贬义。"}, {"q": "“多事之秋”中的“秋”意思是", "type": "choice", "options": ["时期", "秋天", "收获"], "a": 0, "e": "“秋”指时期、年头。"}, {"q": "和“安居乐业”意思相反的是", "type": "choice", "options": ["流离失所", "政通人和", "丰衣足食"], "a": 0, "e": "流离失所：无处安身。"}, {"q": "“不可估量”的“量”意思是", "type": "choice", "options": ["估计、衡量", "气量", "数量"], "a": 0, "e": "估量：估计。"}, {"q": "“精巧”的近义词是", "type": "choice", "options": ["粗笨", "简陋", "精致"], "a": 2, "e": "精巧≈精致。"}, {"q": "“信赖”的反义词是", "type": "choice", "options": ["信任", "依靠", "怀疑"], "a": 2, "e": "信赖↔怀疑。"}, {"q": "“（　）的车间”最恰当的是", "type": "choice", "options": ["鸦雀无声", "震耳欲聋", "山清水秀"], "a": 1, "e": "《慈母情深》中车间震耳欲聋。"}, {"q": "“（　）地盯着”最恰当的是", "type": "choice", "options": ["漫不经心", "东张西望", "目不转睛"], "a": 2, "e": "目不转睛：眼睛一动不动地看。"}, {"q": "“井然有序”形容", "type": "choice", "options": ["很有秩序", "很混乱", "很安静"], "a": 0, "e": "井然：整齐的样子。"}, {"q": "“斩钉截铁”形容说话", "type": "choice", "options": ["吞吞吐吐", "轻声细语", "坚决果断"], "a": 2, "e": "斩钉截铁：态度坚决。"}]}, {"id": "juzi", "title": "五、句子与标点", "tip": "修辞判断选一选；句式和病句要动笔改，改完对照答案。", "items": [{"q": "“白鹭是一首精巧的诗。”这句话用了什么修辞？", "type": "choice", "options": ["拟人", "夸张", "比喻"], "a": 2, "e": "把白鹭比作诗，是比喻。"}, {"q": "“在清水田里，时有一只两只站着钓鱼。”这句话用了什么修辞？", "type": "choice", "options": ["比喻", "拟人", "排比"], "a": 1, "e": "白鹭“钓鱼”，把鸟当人写。"}, {"q": "“少年智则国智，少年富则国富，少年强则国强……”用了什么修辞？", "type": "choice", "options": ["设问", "排比", "反问"], "a": 1, "e": "三个以上结构相似的句子构成排比。"}, {"q": "“全年，整个村子都浸在桂花的香气里。”用了什么修辞？", "type": "choice", "options": ["比喻", "夸张", "拟人"], "a": 1, "e": "“浸”字夸大香气之浓。"}, {"q": "“难道我们能忘记圆明园的毁灭吗？”用了什么修辞？", "type": "choice", "options": ["反问", "疑问", "设问"], "a": 0, "e": "只问不答，答案在句中。"}, {"q": "“什么是幸福？幸福就是一家人围坐在一起吃饭。”用了什么修辞？", "type": "choice", "options": ["反问", "设问", "排比"], "a": 1, "e": "自问自答是设问。"}, {"q": "“他长得像他爸爸。”是比喻句吗？", "type": "choice", "options": ["不是，同类比较", "是比喻", "是夸张"], "a": 0, "e": "本体和喻体是同类事物，不构成比喻。"}, {"q": "“太阳会发光，会发热，是个大火球。”用了什么修辞？", "type": "choice", "options": ["比喻", "排比", "拟人"], "a": 0, "e": "把太阳比作大火球，在说明文里叫“打比方”。"}, {"q": "把“这幅画很美”改成反问句。", "type": "fill", "a": "难道这幅画不美吗？", "e": "陈述句改反问句：加“难道……吗”，肯定变否定。", "options": []}, {"q": "把“蔺相如把和氏璧送回了赵国”改成“被”字句。", "type": "fill", "a": "和氏璧被蔺相如送回了赵国。", "e": "把字句改被字句：交换施受位置。", "options": []}, {"q": "把“母亲说：‘我挺高兴他爱看书的。’”改成转述句。", "type": "fill", "a": "母亲说，她挺高兴我爱看书的。", "e": "去掉引号，冒号改逗号，第一人称改第三人称。", "options": []}, {"q": "缩句：年轻的母亲在震耳欲聋的机器旁紧张地忙碌着。", "type": "fill", "a": "母亲忙碌着。", "e": "去掉所有修饰语，保留“谁+做什么”。", "options": []}, {"q": "扩句：小鸟唱歌。（至少加两处修饰）", "type": "fill", "a": "示例：一只可爱的小鸟在枝头欢快地唱歌。", "e": "加上“什么样的”“在哪里”“怎样地”。", "options": []}, {"q": "用“不但……而且……”写一句话。", "type": "fill", "a": "示例：他不但学习好，而且乐于助人。", "e": "前后两个分句意思递进。", "options": []}, {"q": "修改病句：通过这次活动，使我明白了许多道理。", "type": "fill", "a": "通过这次活动，我明白了许多道理。（或删“使”）", "e": "成分残缺，缺主语。", "options": []}, {"q": "修改病句：他的写作水平明显改进了。", "type": "fill", "a": "他的写作水平明显提高了。", "e": "搭配不当，“水平”只能“提高”。", "options": []}, {"q": "修改病句：我们要认真改正并发现错误。", "type": "fill", "a": "我们要认真发现并改正错误。", "e": "语序颠倒。", "options": []}, {"q": "修改病句：他大约有二十岁左右。", "type": "fill", "a": "他大约有二十岁。（或：他有二十岁左右。）", "e": "重复啰嗦。", "options": []}, {"q": "修改病句：我断定他大概是生病了。", "type": "fill", "a": "我断定他生病了。", "e": "前后矛盾，“断定”与“大概”冲突。", "options": []}, {"q": "修改病句：我们要爱护时间。", "type": "fill", "a": "我们要珍惜时间。", "e": "用词不当。", "options": []}, {"q": "下面标点使用正确的一项是", "type": "choice", "options": ["母亲说：“我挺高兴他爱看书的。”", "母亲说：“我挺高兴他爱看书的”。", "母亲说，“我挺高兴他爱看书的”。"], "a": 0, "e": "提示语在前用冒号，句号在引号内。"}, {"q": "“白天，他干活；晚上，他读书。”这里的分号表示", "type": "choice", "options": ["并列分句之间的停顿", "话没说完", "解释说明"], "a": 0, "e": "两个并列的分句之间用分号。"}, {"q": "“这是一年的最后一天——大年夜。”破折号的作用是", "type": "choice", "options": ["话题转换", "解释说明", "声音延长"], "a": 1, "e": "破折号后面解释前面的内容。"}, {"q": "“他轻轻地哼着：‘月亮……升起来了……’”省略号的作用是", "type": "choice", "options": ["表示内容省略", "表示话没说完", "表示声音断断续续"], "a": 2, "e": "引号内的省略号表示声音断续。"}]}, {"id": "jilei", "title": "六、积累与运用（古诗、日积月累、课文）", "tip": "默写题一个字都不能错，写完自己逐字对一遍。", "items": [{"q": "死去元知万事空，__________。", "type": "fill", "a": "但悲不见九州同", "e": "陆游《示儿》。", "options": []}, {"q": "__________，家祭无忘告乃翁。", "type": "fill", "a": "王师北定中原日", "e": "注意“乃翁”的写法。", "options": []}, {"q": "山外青山楼外楼，__________。", "type": "fill", "a": "西湖歌舞几时休", "e": "林升《题临安邸》。", "options": []}, {"q": "暖风熏得游人醉，__________。", "type": "fill", "a": "直把杭州作汴州", "e": "注意“汴州”。", "options": []}, {"q": "九州生气恃风雷，__________。", "type": "fill", "a": "万马齐喑究可哀", "e": "“喑”读 yīn。", "options": []}, {"q": "__________，不拘一格降人才。", "type": "fill", "a": "我劝天公重抖擞", "e": "注意“抖擞”的写法。", "options": []}, {"q": "空山新雨后，__________。", "type": "fill", "a": "天气晚来秋", "e": "王维《山居秋暝》。", "options": []}, {"q": "明月松间照，__________。", "type": "fill", "a": "清泉石上流", "e": "动静结合的名句。", "options": []}, {"q": "月落乌啼霜满天，__________。", "type": "fill", "a": "江枫渔火对愁眠", "e": "张继《枫桥夜泊》。", "options": []}, {"q": "姑苏城外寒山寺，__________。", "type": "fill", "a": "夜半钟声到客船", "e": "以钟声反衬寂静。", "options": []}, {"q": "天街小雨润如酥，__________。", "type": "fill", "a": "草色遥看近却无", "e": "韩愈《早春呈水部张十八员外》。", "options": []}, {"q": "慈母手中线，__________。", "type": "fill", "a": "游子身上衣", "e": "孟郊《游子吟》。", "options": []}, {"q": "问渠那得清如许？__________。", "type": "fill", "a": "为有源头活水来", "e": "朱熹《观书有感》。", "options": []}, {"q": "西塞山前白鹭飞，__________。", "type": "fill", "a": "桃花流水鳜鱼肥", "e": "张志和《渔歌子》。", "options": []}, {"q": "《白鹭》开头：“白鹭是一首__________。”", "type": "fill", "a": "精巧的诗", "e": "开篇点题。", "options": []}, {"q": "《珍珠鸟》的中心句：“__________，往往创造出美好的境界。”", "type": "fill", "a": "信赖", "e": "只填两个字。", "options": []}, {"q": "《落花生》：“人要做__________的人，不要做只讲体面，而对别人没有好处的人。”", "type": "fill", "a": "有用", "e": "“有用”两个字。", "options": []}, {"q": "《忆读书》：“读书好，__________，读好书。”", "type": "fill", "a": "多读书", "e": "九个字，常考。", "options": []}, {"q": "《古人谈读书》：“读书有三到，谓__________、__________、__________。”", "type": "fill", "a": "心到 眼到 口到", "e": "三个空依次填：心到、眼到、口到。", "options": []}, {"q": "《少年中国说》：“少年智则国智，__________。”", "type": "fill", "a": "少年富则国富", "e": "排比句，注意“则”字。", "options": []}, {"q": "1860 年，__________联军闯进圆明园，抢掠后放火焚烧。", "type": "fill", "a": "英法", "e": "《圆明园的毁灭》。", "options": []}, {"q": "用“太平盛世”这一组成语填空：如今国家富强，人民__________。", "type": "fill", "a": "安居乐业", "e": "也可填“丰衣足食”。", "options": []}, {"q": "“鼠目寸光”的反义词，最恰当的是", "type": "choice", "options": ["高瞻远瞩", "目光如炬", "眼高手低"], "a": 0, "e": "鼠目寸光↔高瞻远瞩。"}, {"q": "下列作品与作者对应有误的一项是", "type": "choice", "options": ["《白鹭》——郭沫若", "《少年中国说》——鲁迅", "《桂花雨》——琦君"], "a": 1, "e": "《少年中国说》作者是梁启超。"}, {"q": "《将相和》的故事出自", "type": "choice", "options": ["《史记》", "《世说新语》", "《论语》"], "a": 0, "e": "出自《史记·廉颇蔺相如列传》。"}, {"q": "“将相和”中的“将”指", "type": "choice", "options": ["廉颇", "蔺相如", "赵王"], "a": 0, "e": "将指廉颇，相指蔺相如。"}, {"q": "《牛郎织女》属于", "type": "choice", "options": ["神话", "寓言", "民间故事"], "a": 2, "e": "中国四大民间传说之一。"}, {"q": "下列不属于“说明方法”的一项是", "type": "choice", "options": ["作比较", "列数字", "借景抒情"], "a": 2, "e": "借景抒情是表达方法，不是说明方法。"}, {"q": "“太阳离我们约有一亿五千万千米远”中的“约”能不能删？", "type": "choice", "options": ["能，意思不变", "能，删了更简洁", "不能，体现说明文语言的准确性"], "a": 2, "e": "“约”表示估计，删了就变成确定数字，不准确。"}, {"q": "第三单元“快乐读书吧”推荐读的是", "type": "choice", "options": ["科普读物", "童话", "民间故事"], "a": 2, "e": "主题《从前有座山》，读中外民间故事。"}]}], "readings": [{"id": "r1", "title": "课内阅读（一）《白鹭》", "from": "郭沫若", "passage": ["白鹭是一首精巧的诗。", "色素的配合，身段的大小，一切都很适宜。", "白鹤太大而嫌生硬，即如粉红的朱鹭或灰色的苍鹭，也觉得大了一些，而且太不寻常了。"], "questions": [{"q": "这段文字主要写白鹭的（　）", "type": "choice", "options": ["飞行姿态", "生活习性", "外形适宜"], "a": 2, "e": "三句话都在写“配合”“身段”“大小”，是外形。"}, {"q": "写白鹤、朱鹭、苍鹭，有什么作用？", "type": "open", "options": [], "a": "用对比（衬托）的方法，以白鹤等鸟的“大”“不寻常”，突出白鹭的大小适宜、平凡而美。", "e": ""}, {"q": "“白鹭是一首精巧的诗”在全文起什么作用？", "type": "open", "options": [], "a": "开篇点题（总起），把白鹭比作诗，奠定全文赞美的感情基调，与结尾呼应。", "e": ""}, {"q": "生活中还有哪些“常见却被忽略的美”？举一例，说说你的感受（30 字左右）。", "type": "open", "options": [], "a": "示例：墙角的一丛野花，没人浇水也开得热闹。美不一定惊天动地，平凡处也有动人的力量。", "e": ""}]}, {"id": "r2", "title": "课内阅读（二）《落花生》", "from": "许地山", "passage": ["花生的好处很多，有一样最可贵：它的果实埋在地里，不像桃子、石榴、苹果那样，把鲜红嫩绿的果实高高地挂在枝头上，使人一见就生爱慕之心。", "你们看它矮矮地长在地上，等到成熟了，也不能立刻分辨出来它有没有果实，必须挖起来才知道。"], "questions": [{"q": "这段话把花生和__________、__________、__________作对比。", "type": "open", "options": [], "a": "桃子、石榴、苹果", "e": ""}, {"q": "父亲这样对比，是为了（　）", "type": "choice", "options": ["贬低桃子、石榴、苹果", "突出花生默默奉献的可贵", "说明花生不好看"], "a": 1, "e": "对比是为了突出花生的品质，不是否定别的事物。"}, {"q": "“有用的人”指的是什么样的人？", "type": "open", "options": [], "a": "指不图虚名、踏实做事、对别人和社会有实际贡献的人，而不是只讲外表体面的人。", "e": ""}, {"q": "这种借花生讲做人道理的写法叫（　）", "type": "choice", "options": ["借物喻人", "托物言志", "借景抒情"], "a": 0, "e": "借花生喻做人，是借物喻人。"}]}, {"id": "r3", "title": "课内阅读（三）《慈母情深》", "from": "梁晓声", "passage": ["母亲说完，立刻又坐了下去，立刻又弯曲了背，立刻又将头俯在缝纫机板上了，立刻又陷入了忙碌……", "我鼻子一酸，攥着钱跑了出去……"], "questions": [{"q": "四个“立刻”反复出现，有什么表达效果？", "type": "open", "options": [], "a": "反复强调母亲动作的急促、连续，突出母亲劳动的紧张辛苦，也表现“我”看在眼里的心疼。", "e": ""}, {"q": "这段话主要用了（　）", "type": "choice", "options": ["语言描写", "动作描写", "环境描写"], "a": 1, "e": "坐、弯曲、俯、陷入，都是动作。"}, {"q": "“我”为什么“鼻子一酸”？", "type": "open", "options": [], "a": "因为看到母亲在恶劣环境中拼命干活，却毫不犹豫给钱让“我”买书，“我”既感动又心疼、愧疚。", "e": ""}, {"q": "这段文字表现了母亲（　）", "type": "choice", "options": ["脾气急躁", "手艺高超", "勤劳辛苦、疼爱孩子"], "a": 2, "e": "反复写忙碌，是为了写母亲的辛劳与爱。"}]}, {"id": "r4", "title": "课内阅读（四）《圆明园的毁灭》", "from": "课文", "passage": ["圆明园的毁灭是祖国文化史上不可估量的损失，也是世界文化史上不可估量的损失！"], "questions": [{"q": "这句话在文中出现了两次，作用是（　）", "type": "choice", "options": ["首尾呼应，强调损失巨大", "设置悬念", "承上启下"], "a": 0, "e": "开头和结尾都出现，形成呼应，反复强调损失不可估量。"}, {"q": "“不可估量”的意思是（　）", "type": "choice", "options": ["数量很多", "无法估计", "无法计算价钱"], "a": 1, "e": "估量即估计、衡量。"}, {"q": "为什么说这既是“祖国文化史”的损失，又是“世界文化史”的损失？", "type": "open", "options": [], "a": "因为圆明园集中了中外园林艺术的精华、收藏了无数珍贵文物，是世界文化艺术的瑰宝，它的毁灭是全人类的共同损失。", "e": ""}, {"q": "读了这句话，你有什么感受？", "type": "open", "options": [], "a": "示例：我感到无比痛心，也明白了“落后就要挨打”，我们要努力学习，让国家更强大。", "e": ""}]}, {"id": "r5", "title": "课内阅读（五）《少年中国说（节选）》", "from": "梁启超", "passage": ["故今日之责任，不在他人，而全在我少年。", "少年智则国智，少年富则国富，少年强则国强，少年独立则国独立，少年自由则国自由，少年进步则国进步。"], "questions": [{"q": "这段话主要用了（　）的修辞手法", "type": "choice", "options": ["夸张", "排比", "设问"], "a": 1, "e": "六个“少年……则国……”结构相同，是排比。"}, {"q": "“故”的意思是（　）", "type": "choice", "options": ["故意", "过去", "所以"], "a": 2, "e": "“故”在这里是“所以”。"}, {"q": "为什么说责任“全在我少年”？", "type": "open", "options": [], "a": "因为少年是国家的未来和希望，少年的智慧、力量、进步决定着国家的前途，所以强国责任在少年。", "e": ""}, {"q": "补写：少年胜于欧洲则国胜于欧洲，________________。", "type": "open", "options": [], "a": "少年雄于地球则国雄于地球", "e": ""}]}, {"id": "r6", "title": "课内阅读（六）《古人谈读书》", "from": "朱熹", "passage": ["余尝谓读书有三到，谓心到、眼到、口到。", "心不在此，则眼不看仔细，心眼既不专一，却只漫浪诵读，决不能记，记亦不能久也。", "三到之中，心到最急。心既到矣，眼口岂不到乎？"], "questions": [{"q": "“余”指的是（　）", "type": "choice", "options": ["其余", "我", "剩余"], "a": 1, "e": "文言文中“余”常作第一人称“我”。"}, {"q": "“三到”指__________、__________、__________。", "type": "open", "options": [], "a": "心到、眼到、口到", "e": ""}, {"q": "“心到最急”的“急”是什么意思？为什么说心到最重要？", "type": "open", "options": [], "a": "“急”是“要紧、最重要”。因为心思不在书上，眼睛就看不仔细，嘴巴也只是随便念，记不住也记不久。", "e": ""}, {"q": "联系自己读书的经历，说说你今后打算怎样做到“三到”。", "type": "open", "options": [], "a": "示例：我以前读书只动嘴不动脑，以后要边读边想、边画重点，读完用自己的话讲一遍。", "e": ""}]}, {"id": "x1", "title": "课外阅读（1）外婆的针线筐", "from": "原创短文", "passage": ["外婆的针线筐是一只旧竹篮，边沿磨得发亮。篮子里挤着各色线团、几根银针、一把小剪刀，还有一块硬邦邦的肥皂——外婆说，针在肥皂上蹭一蹭，扎布就顺当了。", "小时候，我的裤子膝盖总先破。外婆从不埋怨，只把我按在小板凳上，让我把腿伸直。她眯起眼，把针举到窗前的光里穿线，穿一次，晃一下，像在跟那根线商量。线穿好了，她便低下头，一针一针地补。她一边补，一边哼着不成调的小曲。我趴在她膝头，闻着皂角的味道，不知不觉就睡着了。补丁是圆的，针脚密密的，像一圈小小的年轮。", "有一年冬天，我嫌她补的补丁土气，赌气把裤子塞进柜子最底层。第二天上学，我发现裤子已经洗好叠好，补丁上多了一朵用红线绣的小花。那朵花歪歪扭扭，却开得认真。我穿着它去学校，一整天都觉得膝盖暖暖的。", "后来我到城里读书，外婆的眼睛越来越花，针线筐被搁在柜顶，落了一层薄灰。去年暑假回去，我翻出那只竹篮，里面的线团还在，颜色却旧了。筐底还压着一张旧照片，是年轻时的外婆，梳着两条长辫子，眼睛亮亮的。外婆坐在门口，笑着看我摆弄，忽然说：“你小时候的裤子，我都留着呢。”她抬手朝里屋指了指。", "我打开那只旧木箱，十几条裤子叠得整整齐齐，每一条的膝盖上，都有一块补丁，有的圆，有的方，有的上面还绣着花。阳光从窗子斜进来，落在那些针脚上，像落在一段一段被细心缝住的日子里。", "那一刻我忽然明白，外婆缝的从来不只是破洞。"], "questions": [{"q": "外婆把针在肥皂上蹭一蹭，主要是因为（ ）", "type": "choice", "options": ["防止针生锈", "想让针变得更亮", "让线更容易穿过去", "让针扎布时更顺当"], "a": 3, "e": "针蹭过肥皂后表面变滑，扎布时更省力。"}, {"q": "“我穿着它去学校，一整天都觉得膝盖暖暖的。”这里的“暖暖的”只是因为裤子厚吗？请说说你的理解。", "type": "open", "options": [], "a": "不只是因为裤子厚。补丁上多了外婆绣的小花，“我”感受到了外婆的疼爱和用心，心里温暖，所以觉得膝盖也是暖的。", "e": ""}, {"q": "外婆为“我”做了哪两件事？请简要概括。", "type": "open", "options": [], "a": "①“我”的裤子膝盖破了，外婆一针一线地补好；②外婆在补丁上绣了一朵小红花。", "e": ""}, {"q": "“外婆缝的从来不只是破洞。”文章用这句话结尾有什么好处？", "type": "open", "options": [], "a": "点明中心，深化主题：外婆缝进针脚里的是对“我”的爱；话说得含蓄，留有余味，能引发读者思考。", "e": ""}, {"q": "联系生活，说说你身边有没有这样“不说爱却满是爱”的细节。30字左右。", "type": "open", "options": [], "a": "示例：每次出门，妈妈总要多塞一件外套；我嫌她啰嗦，后来才懂那是她的牵挂。", "e": ""}]}, {"id": "x2", "title": "课外阅读（2）父亲的自行车", "from": "原创短文", "passage": ["父亲的自行车是二八式的，黑漆掉了大半，车铃却还响。小时候，我坐在前面的横梁上，父亲在后面蹬，风从耳边过，路边的白杨一棵一棵往后退。我总爱按车铃，“叮铃铃”，父亲就笑：“别按了，把人家鸡都吓飞了。”", "上初中，学校离家十里。父亲每天五点半起床，先把车推到院里打气，再进屋叫我。冬天路滑，他骑得很慢，遇到上坡，他就弯下身子用力蹬，让我抱紧他的腰。我趴在他背上，能听见他喘气，一下一下，像拉风箱。车把上缠着旧布条，是母亲怕他冬天握着凉，一圈一圈缠上去的。", "有一回下大雪，车链子冻住了。父亲蹲在雪地里，摘了手套去抠链子上的冰。他的手指很快冻得通红，哈一口气，接着抠。修好时，他的眉毛上落了一层雪，像个雪人。他回头冲我笑：“上来，迟到了老师要说的。”", "后来我考上了城里的高中，住校，一个月回一次。父亲不再骑车送我，只在我走的时候，把车推到门口，说：“路上小心。”我坐上班车，从车窗里看见他扶着车把站在那儿，车铃在风里轻轻晃。", "再后来，那辆车被放在杂物间，车架生了锈，落满了灰。我工作后给他买了一辆电动车，他学了几天，还是骑着那辆旧车去赶集，说：“骑惯了。”", "去年春节，我回老家。父亲蹲在院里擦那辆车，擦得很慢，很仔细，像在擦一件宝贝。我走过去，他抬起头，说了一句：“你小时候坐这儿，一按铃，就笑。”", "我忽然说不出话。原来有些路，他早就骑完了；有些话，他一直记着。"], "questions": [{"q": "父亲在雪地里修车时“摘了手套”，这一细节说明（ ）", "type": "choice", "options": ["他一点儿也不怕冷", "他的手套太旧了", "他急着修好车送“我”上学，顾不上冷", "他怕手套弄脏"], "a": 2, "e": "“摘了手套”说明他一心想着修好车送“我”上学，顾不上手冷。"}, {"q": "“我趴在他背上，能听见他喘气，一下一下，像拉风箱。”这句话表现了什么？", "type": "open", "options": [], "a": "表现了父亲骑车带“我”上坡时的吃力、劳累，也写出了“我”趴在父亲背上的真切感受，流露出“我”对父亲的心疼。", "e": ""}, {"q": "文章写了父亲和自行车的哪几个生活片段？请简要概括其中三个。", "type": "open", "options": [], "a": "示例：①“我”小时候坐在横梁上，父亲骑车带“我”，任“我”按车铃；②大雪天车链冻住，父亲摘下手套在雪地里修车；③“我”上高中后，父亲把车推到门口送“我”；④父亲一直舍不得换掉那辆旧车。", "e": ""}, {"q": "文章多次写到车铃，这样写有什么好处？", "type": "open", "options": [], "a": "车铃串起了“我”成长中的几件往事，是父爱的见证；前后照应，使文章结构完整；借车铃表达“我”对父亲的感激和眷恋，读来亲切感人。", "e": ""}, {"q": "读了这篇文章，你想对自己的父亲或母亲说什么？30字左右。", "type": "open", "options": [], "a": "示例：爸爸，您从不说爱我，可您做的每件小事我都记得。谢谢您。", "e": ""}]}, {"id": "x3", "title": "课外阅读（3）山村的早晨", "from": "原创短文", "passage": ["山村的早晨，是从雾里醒来的。", "天还没大亮，雾从溪面上漫上来，白白的，软软的，把稻田、竹林和几户人家的屋顶都裹了进去。远山只剩一道淡淡的影子，像谁用铅笔轻轻画在天边。这时候，村子是静的，静得能听见露珠从草叶上滚下去，“嗒”的一声。", "忽然，一声鸡啼划开雾。接着是第二声、第三声，此起彼伏。狗也跟着叫起来，短的，急的，像在应和。有户人家的木门“吱呀”开了，一个老人挑着水桶出来，扁担在肩上一颤一颤，桶里的水晃出细细的圈。他走到溪边，弯腰舀水，水面上映出他花白的头发，也映出慢慢散开的雾。", "雾开始动了。它顺着山势往上爬，先露出几棵松树的顶，又露出半坡的茶园，最后，整座山都站了出来，绿得发亮。阳光越过山头，落在溪面上，碎成一片一片的金子。几只白鹭从竹林里飞起，翅膀扇得很慢，掠过水面，又落进远处的田里。田埂上，一头水牛慢慢走着，尾巴一甩一甩。", "溪边，几个妇女蹲在石头上洗衣，棒槌声“笃笃”地响。孩子们背着书包跑过石桥，惊起一群麻雀。炊烟从各家屋顶升起来，直直的，被风一吹，散成薄薄的一层。空气里有柴火的味道，也有泥土和青草的味道。", "我站在村口的老槐树下，看着这一切，忽然觉得，山村的早晨像一支曲子：雾是它的前奏，鸡啼是它的第一声鼓点，而那些走动的人、飞起的鸟、升起的水汽，都是它跳动的音符。", "太阳升高了，雾散了，山村完全醒了。可我还站着，舍不得走。"], "questions": [{"q": "文章写雾“顺着山势往上爬”，这样写的作用是（ ）", "type": "choice", "options": ["把雾当作人来写，写出雾慢慢散去的动态", "说明这座山很高", "表示时间过得很快", "说明山里的雾很厚"], "a": 0, "e": "“爬”字把雾当作人来写，写出雾气慢慢升腾、散去的动态。"}, {"q": "“静得能听见露珠从草叶上滚下去，‘嗒’的一声。”这句话是想表现什么？", "type": "open", "options": [], "a": "用露珠滚落的声音来写静，以有声衬无声，突出山村早晨的安静。", "e": ""}, {"q": "文章依次描写了山村早晨的哪些景物？请简要概括。", "type": "open", "options": [], "a": "示例：雾中的山村—鸡啼狗叫、老人挑水—雾散日出、白鹭飞起—溪边洗衣、孩子上学、炊烟升起。", "e": ""}, {"q": "文章结尾把山村的早晨比作“一支曲子”，这样写有什么好处？", "type": "open", "options": [], "a": "把山村早晨比作一支曲子，形象地写出早晨景物和声音的丰富、有节奏，表达了作者对山村的喜爱，也总结了全文。", "e": ""}, {"q": "你见过的早晨是什么样子的？用一两句话写一写。30字左右。", "type": "open", "options": [], "a": "示例：我见过的早晨，天边刚泛红，卖早点的摊子冒着白气，路上的人渐渐多了。", "e": ""}]}, {"id": "x4", "title": "课外阅读（4）夏日荷塘", "from": "原创短文", "passage": ["夏天的荷塘，是一幅会动的画。", "午后，太阳正毒。荷叶一片挨着一片，撑开一把把绿伞，把水面遮得严严实实。荷花有的全开了，露出嫩黄的小莲蓬；有的还是花骨朵，尖上透着一点红，像含着话没说。风不来的时候，满塘静悄悄的，只有几只蜻蜓立在荷尖上，翅膀薄得透明。塘边的柳树垂着枝条，一动不动，像也在打盹。", "风来了。先是荷叶轻轻一抖，接着一片接一片地翻过去，露出背面浅浅的灰绿。“哗——”满塘的荷叶都摇起来，像有人在上面跑过。荷花也跟着点头，花瓣上的水珠滚下去，“咚”地落进水里，惊得小鱼一摆尾，钻进深处。水面上的波纹一圈圈荡开，好一会儿才平静下来。", "天说变就变。乌云压过来，雨点噼里啪啦砸在荷叶上，大的像豆，小的像线。荷叶被砸得一沉，又弹起来，把水珠抖进塘里。雨声、风声、荷叶声混在一起，热闹得像一场音乐会。我躲在塘边的凉亭里，看雨脚在水面上踩出无数小坑，一圈一圈地散开。", "雨停时，已是傍晚。太阳从云缝里露出来，把荷叶照得发亮。塘边的芦苇也直起了腰，叶尖上挂着水珠。水珠在叶心滚来滚去，像一颗颗不肯回家的珍珠。青蛙从叶下探出头，“呱”地叫了一声，接着，满塘的蛙声都响起来。萤火虫提着小灯笼，从草丛里飞出来，在荷叶间忽明忽暗。", "我忽然明白，荷塘的美，一半在静，一半在动。静的时候，它是一幅画；动的时候，它是一支歌。"], "questions": [{"q": "文中“荷叶被砸得一沉，又弹起来”中的“砸”字，最能表现（ ）", "type": "choice", "options": ["雨点大而急，荷叶有弹性", "风很大", "荷叶很硬", "雨下得很久"], "a": 0, "e": "“砸”写出雨点大而急，“一沉又弹起来”写出荷叶的弹性。"}, {"q": "文章开头说“夏天的荷塘，是一幅会动的画”，“会动”体现在哪些地方？", "type": "open", "options": [], "a": "风吹荷叶翻动、荷花点头、水珠滚落、小鱼游动、雨打荷叶、青蛙鸣叫、满塘蛙声，这些都让画面“动”了起来。", "e": ""}, {"q": "请简要概括雨中荷塘的景象。", "type": "open", "options": [], "a": "乌云压来，雨点砸在荷叶上，荷叶一沉一弹，把水珠抖落；风声、雨声、荷叶声混成一片；雨脚在水面踩出无数小坑。", "e": ""}, {"q": "文章把荷塘的“静”和“动”结合起来写，这样写有什么好处？", "type": "open", "options": [], "a": "动静结合，使画面更有生机和层次，写出荷塘在平静时和风雨中的不同美，表达了作者的喜爱之情。", "e": ""}, {"q": "你观察过哪种自然景象？用一两句话写出它的动静变化。30字左右。", "type": "open", "options": [], "a": "示例：起风时，满树叶子哗哗响；风一停，叶子又静静地垂下来。", "e": ""}]}, {"id": "x5", "title": "课外阅读（5）第一次上台", "from": "原创短文", "passage": ["五年级开学，老师让我在国旗下讲话。听到这个消息，我的手心立刻冒了汗。", "稿子是我自己写的，改了五遍。可一站到镜子前，那些字就像一群不听话的蚂蚁，怎么也排不成队。我对着镜子念：“尊敬的老师，亲爱的同学们……”念到第三句，声音就开始发抖。", "妈妈看出来了。她没说什么，只把一杯温水放在我桌上，说：“你先把稿子读给我听，就当我是全校同学。”我读了一遍，磕磕巴巴。她又说：“再读一遍，这次慢一点。”我读第二遍，第三遍……读到第五遍时，妈妈笑了：“这不挺好？”她把稿子折好，放进我书包，又拍了拍我的肩。", "星期一早上，操场上的风有点凉。我站在队伍里，看着前面黑压压的人头，腿忽然软了。主持人念到我的名字，我往前走，每一步都像踩在棉花上。", "我站到话筒前，抬起头，看见最后一排有个同学正冲我比大拇指。我深吸一口气，开口：“尊敬的老师，亲爱的同学们……”声音有点抖，但一句一句，竟然都出来了。", "讲到一半，我忘了词。台下安静得能听见风声。我的心“咚咚”直跳，眼睛往人群里一扫，看见了妈妈——她站在校门口，朝我轻轻点头。我忽然想起稿子上的那句话，接着讲了下去。", "走下台时，掌声响起来。我的后背全湿了，可心里像揣着一个小太阳。那天晚上，我把稿子又读了一遍，读得很慢，也很稳。", "后来我才知道，妈妈那天请了假，一直站在校门口。她没说，我也没问。有些勇气，是别人悄悄放进你口袋里的。"], "questions": [{"q": "文中“那些字就像一群不听话的蚂蚁，怎么也排不成队”写出了“我”怎样的心情？（ ）", "type": "choice", "options": ["疲倦", "兴奋", "生气", "紧张，背不熟稿子"], "a": 3, "e": "“蚂蚁排不成队”比喻字句连不成串，写出“我”紧张、背不熟稿子的心情。"}, {"q": "“有些勇气，是别人悄悄放进你口袋里的。”这句话是什么意思？", "type": "open", "options": [], "a": "意思是：勇气不是自己凭空产生的，是妈妈默默的陪伴和鼓励给了“我”力量，让“我”勇敢起来。", "e": ""}, {"q": "请简要概括“我”上台前后心情的变化。", "type": "open", "options": [], "a": "上台前紧张、害怕—上台时声音发抖，忘词后更加慌乱—看到妈妈后镇定下来—下台后激动、温暖。", "e": ""}, {"q": "文章写“我”忘词时“台下安静得能听见风声”，这样写有什么好处？", "type": "open", "options": [], "a": "用环境描写烘托气氛，以静衬出“我”忘词时的慌乱和全场的安静，让读者仿佛身临其境。", "e": ""}, {"q": "你也有过类似的“第一次”吗？说说当时的感受。30字左右。", "type": "open", "options": [], "a": "示例：第一次学游泳，我抓着池边不敢松手，后来在教练鼓励下松了手，发现水并不可怕。", "e": ""}]}, {"id": "x6", "title": "课外阅读（6）接力棒", "from": "原创短文", "passage": ["校运会那天，我们班的接力赛出了意外。", "第三棒是林小满，跑得最快。为了这次比赛，她每天放学都在操场上练交接棒，练到天色发暗才回家。可就在她接棒转身的一刹那，脚下一滑，摔在了跑道上。接力棒滚出去老远，她趴在地上，膝盖蹭破了一大块皮。", "看台上一下子安静了。我站在第四棒的位置，脑子“嗡”的一声：完了，第一名没了。", "林小满没有哭。她爬起来，一瘸一拐地去捡棒，又转身往回跑——按规则，棒掉了必须由掉棒的人捡回。她的膝盖上全是土，血珠渗出来，可她跑得比刚才还急。她咬着嘴唇，眼睛一直盯着接力区。", "等她跑到我面前，把棒递过来时，我看见她的手在抖。她喘着气说：“快跑，别管我。”", "我接过棒，撒腿就跑。跑道两边的加油声像潮水一样涌过来，可我一句也听不清，只顾往前冲。手里那根棒是热的，像刚从火里拿出来。", "我们最后拿了第四名。全班没有一个人埋怨她，可林小满还是趴在桌上哭了很久。她把号码布折好，压在课本下面，一整个下午都没怎么说话。放学时，她把接力棒塞进书包，说：“明年，我还跑第三棒。”声音不大，却像钉子一样钉在我心里。", "第二年，我们真的拿了第一。冲过终点线的时候，林小满把接力棒高高举起来，膝盖上那道疤在阳光下很亮。", "老师后来在班会上说：“一棒接一棒，传下去的不只是速度。”我们都懂她的意思。"], "questions": [{"q": "林小满摔倒后“没有哭”，还“一瘸一拐地去捡棒”，说明她是个怎样的孩子？（ ）", "type": "choice", "options": ["坚强、有责任心", "爱面子", "不服输但做事冲动", "怕老师批评"], "a": 0, "e": "她忍痛捡棒、坚持完成交接，表现出坚强和责任心。"}, {"q": "“手里那根棒是热的，像刚从火里拿出来。”棒为什么会是“热的”？", "type": "open", "options": [], "a": "一方面棒被握久了、跑热了；更重要的是，林小满忍着伤痛把棒交到“我”手里，“我”感受到她的信任、坚持和集体荣誉感，心里发热。", "e": ""}, {"q": "请简要概括这件事的起因、经过和结果。", "type": "open", "options": [], "a": "起因：接力赛中林小满接棒时摔倒，膝盖受伤；经过：她忍痛捡棒，坚持把棒交给“我”，“我”奋力跑完；结果：班级得了第四名，没有人埋怨她，第二年她们拿了第一。", "e": ""}, {"q": "文章结尾老师的话“传下去的不只是速度”，这样写有什么好处？", "type": "open", "options": [], "a": "借老师的话点明中心：接力赛传递的不只是速度，还有坚持、责任、信任和团结；结尾含蓄有力，引人思考。", "e": ""}, {"q": "在集体活动中，你是怎样对待自己或别人的失误的？写一写。30字左右。", "type": "open", "options": [], "a": "示例：我失误时，先向同学道歉，再想办法补救；别人失误时，我不埋怨，给他加油。", "e": ""}]}, {"id": "x7", "title": "课外阅读（7）蜜蜂的“舞蹈语言”", "from": "原创短文", "passage": ["蜜蜂不会说话，可它们有自己的“语言”——舞蹈。", "一只蜜蜂发现了花蜜，它会飞回家，在蜂巢的垂直面上跳起舞来。如果花蜜离得近，它就跳“圆圈舞”：绕着一个小圈，左转几圈，右转几圈。舞蹈跳得越起劲，说明那里的花蜜越多。同伴们围在旁边，用触角碰碰它，好像在进行一场无声的会议。", "如果花蜜离得远，它就换成“摆尾舞”：先直线爬一段，一边爬一边飞快地摆动腹部，然后绕一个半圆回到起点，再直线爬一段，再绕回来，走出一个“8”字。这舞看着简单，里面却藏着两条重要信息。", "第一条是方向。蜜蜂跳舞时，那条直线和地心引力之间有一个夹角，这个夹角正好等于太阳方向与花蜜方向之间的夹角。同伴们不用出门，就能知道该往哪边飞。", "第二条是距离。花蜜越远，它摆尾的时间就越长，爬得也越慢。科学家做过实验：把花蜜放在一百米外，蜜蜂大约每秒摆尾一次；放到一千米外，它每分钟摆尾的次数就明显变少，可每一次摆尾的时间更长。", "更奇妙的是，蜂巢里很黑，同伴们看不见舞蹈，却能靠触角“听”到翅膀和身体的振动。它们把振动传下去，于是一传十、十传百，整群蜜蜂很快都知道了花蜜的位置。一只蜜蜂的力量很小，可它们靠这种方式，把整群蜜蜂连在了一起。", "蜜蜂的舞蹈，是它们写在空中的地图。人类用了很多年才读懂，可蜜蜂已经这样“说”了几千万年。"], "questions": [{"q": "蜜蜂跳“摆尾舞”时，摆尾时间的长短主要告诉同伴什么？（ ）", "type": "choice", "options": ["花蜜的远近", "太阳的方向", "天气的好坏", "花蜜的多少"], "a": 0, "e": "摆尾时间越长，说明花蜜越远。"}, {"q": "“蜜蜂的舞蹈，是它们写在空中的地图。”这句话中的“地图”指什么？", "type": "open", "options": [], "a": "“地图”指蜜蜂通过舞蹈传递的花蜜方向和距离的信息，同伴据此就能找到花蜜的位置。", "e": ""}, {"q": "请简要概括蜜蜂的舞蹈传递了哪两条重要信息。", "type": "open", "options": [], "a": "一是方向：直线与地心引力的夹角，对应太阳方向与花蜜方向的夹角；二是距离：摆尾时间越长、爬得越慢，花蜜就越远。", "e": ""}, {"q": "文章举“一百米外”“一千米外”的实验，这样写有什么好处？", "type": "open", "options": [], "a": "举例子、列数字，具体准确地说明摆尾时间与花蜜距离的关系，使说明更有说服力。", "e": ""}, {"q": "你还知道哪种动物有奇特的交流方式？简单说一说。30字左右。", "type": "open", "options": [], "a": "示例：蚂蚁用触角互相传递信息，海豚用声波交流，它们都有自己的“语言”。", "e": ""}]}, {"id": "x8", "title": "课外阅读（8）一张年画", "from": "原创短文", "passage": ["从前，运河边有个小镇，镇上人家过年都要贴年画。最有名的是一位姓赵的老画师，他画的娃娃，胖乎乎，笑盈盈，抱着大鲤鱼，像要从纸上跳下来。", "一年腊月，镇上来了个衣衫单薄的小男孩，站在画铺门口，看了一整天才走。第二天又来，第三天还来。老画师问他：“你想买画？”男孩摇摇头，低声说：“我想学。”", "老画师让他磨墨。磨了三天，男孩一句话没说，墨磨得又细又匀，手上沾满墨，衣服也染黑了一块，他却一点儿也不在意。老画师又让他看画，看了七天，男孩把每一幅画上的娃娃都记在了心里，连鲤鱼有几片鳞都数得清。", "老画师这才把一支笔递给他，说：“画吧。”", "男孩画的第一个娃娃，脸太瘦，笑得也别扭。老画师摇头：“娃娃要圆，圆得像刚出锅的馒头；笑要从眼睛里出来，不能只挂在嘴角。”男孩重画，一遍又一遍，画秃了三支笔。", "除夕那天，老画师让他自己画一张，贴在铺子最显眼的地方。男孩画了一个娃娃，怀里抱着一条大鲤鱼，脚下踩着荷花，笑得眼睛弯成了月牙。老画师看了很久，提起笔，在画角添了一行小字：有心人，画有心。", "那一年，这种年画被镇上的人抢着买。有人从很远的地方赶来，只为买一张“会笑的娃娃”。后来，男孩也成了画师，收了徒弟。他教徒弟的第一句话，和老画师一样：“先磨墨，再看画。”", "如今，运河边的年画还是年年贴。人们说，画上的娃娃笑得好，是因为画的人心里先有了笑。"], "questions": [{"q": "老画师让男孩先磨墨、再看画，用意是什么？（ ）", "type": "choice", "options": ["考验他有没有耐心，让他先打好根基", "铺子里缺人手，让他干活", "不想教他，故意为难他", "让他知难而退"], "a": 0, "e": "磨墨、看画都是打根基，老画师在考验他的耐心。"}, {"q": "“画上的娃娃笑得好，是因为画的人心里先有了笑。”这句话该怎样理解？", "type": "open", "options": [], "a": "画上的娃娃笑得好看，是因为画师心里有真情、有对生活的热爱；只有用心体会，才能画出打动人心的作品。", "e": ""}, {"q": "请简要概括男孩学画的过程。", "type": "open", "options": [], "a": "男孩想学画—老画师让他磨墨三天、看画七天—他反复练习画娃娃，画秃了三支笔—除夕画出受欢迎的年画—后来也成了画师。", "e": ""}, {"q": "文章写男孩“画秃了三支笔”，这样写有什么好处？", "type": "open", "options": [], "a": "用细节具体表现男孩练习次数多、刻苦认真，说明成功来自勤奋，比直接说“他很努力”更有说服力。", "e": ""}, {"q": "你学过什么本领？从中学到了什么道理？30字左右。", "type": "open", "options": [], "a": "示例：我学骑自行车，摔了很多次才学会，我明白了坚持就能成功。", "e": ""}]}, {"id": "x9", "title": "课外阅读（9）巧手阿巧", "from": "原创短文", "passage": ["很久以前，山里有个姑娘叫阿巧，剪得一手好窗花。她剪的喜鹊会眨眼，剪的牡丹能引来蝴蝶，村里人办喜事，都要请她剪一对“龙凤呈祥”。", "那年大旱，三个月没下一滴雨。田里的稻子卷了叶，井也见了底。乡亲们抬着供品去龙王庙求雨，求了七天，天上连一片云也没有。", "一天夜里，阿巧梦见一位白发老人。老人说：“山后有眼泉，被一块青石压着。石上刻着九十九只蝴蝶，谁能一口气剪出第一百只，泉眼就开了。”", "阿巧醒来，顾不上告诉家里人，揣了两个冷馍就上了山。山后的青石又大又滑，上面果然刻满了蝴蝶，一只只像要飞起来。她坐在石前，铺开红纸，一剪子下去——第一只，翅膀歪了；第二只，触角断了；第三只，剪到一半，纸裂了。", "她不吃不喝，剪了三天三夜。手指磨出了血泡，血泡破了，染红了纸。到第九十九只时，她的手已经抖得握不住剪刀。", "天快亮了。阿巧闭上眼，想起乡亲们干裂的田，想起孩子们渴得发白的嘴唇。她深吸一口气，睁开眼，拿起剪刀，又稳又准地剪起来。", "第一百只蝴蝶落在她手心里，翅膀上的纹路清清楚楚。就在这时，青石“咔”地一响，裂开一道缝，一股清水涌了出来。那水清得能看见底，喝一口，甜到心里。", "泉水顺着山沟流进田里，稻子直起了腰。乡亲们说，那天早上，有人看见阿巧剪的蝴蝶真的飞了起来，一只跟着一只，飞向山外。", "后来，山里的姑娘都学剪蝴蝶。老人们说，剪蝴蝶不光要手巧，还要心里装着别人。"], "questions": [{"q": "阿巧能剪出第一百只蝴蝶，最关键的原因是什么？（ ）", "type": "choice", "options": ["她心里装着乡亲，咬牙坚持", "她的剪刀特别好", "她梦见了白发老人", "她一共剪了三天"], "a": 0, "e": "她心里装着乡亲，凭着坚持剪出了第一百只蝴蝶。"}, {"q": "“剪蝴蝶不光要手巧，还要心里装着别人。”这句话是什么意思？", "type": "open", "options": [], "a": "意思是：学手艺不光要手艺好，更要有一颗为他人着想的心；心里装着别人，作品才有力量。", "e": ""}, {"q": "请简要概括阿巧上山求泉的经过。", "type": "open", "options": [], "a": "阿巧梦见老人指点—上山找到青石—坐在石前剪蝴蝶，一次次失败—坚持三天三夜，手磨出血泡—剪出第一百只蝴蝶，泉水涌出。", "e": ""}, {"q": "文章写“手指磨出了血泡，血泡破了，染红了纸”，这样写有什么好处？", "type": "open", "options": [], "a": "细节描写，具体写出阿巧受伤、辛苦的程度，表现她的坚持和决心，使故事更感人。", "e": ""}, {"q": "你还知道哪个民间故事？它告诉了我们什么道理？30字左右。", "type": "open", "options": [], "a": "示例：《牛郎织女》让我懂得，勤劳善良的人最可贵。", "e": ""}]}, {"id": "x10", "title": "课外阅读（10）灯塔下的守岛人", "from": "原创短文", "passage": ["开山岛很小，只有两个足球场那么大。岛上没有淡水，没有电，一年到头刮大风。1986年，二十六岁的王继才登上这座岛，成了一名守岛人。岛的最高处立着一座灯塔，夜里亮起来，几十里外的渔船都看得见。", "上岛前，有人劝他：“那地方，连渔民都不愿多待。”他还是去了。妻子王仕花放心不下，辞了工作，把女儿托给老人，也上了岛。", "刚上岛时，岛上只有几间旧营房，窗户漏风。夜里海浪拍岸，声音像打雷。王仕花第一夜没睡着，第二天清晨，她看见丈夫在风里升旗，站得笔直，便留了下来。她没再劝他下山，只把带来的咸菜和米面搬进屋里。", "岛上的日子，是一天一天数着过的。每天清晨，他们升起国旗。国旗和灯塔，是岛上最醒目的两样东西。风大，旗绳常常缠住，王继才就爬上旗杆去解。有一次，他从杆上摔下来，肋骨断了两根，躺了几天，又照常升旗。", "没有淡水，他们接雨水；没有电，他们点蜡烛；台风来了，浪打到门口，他们就用绳子把彼此拴在屋里。他们在岛上种树，活了几棵，就高兴好几天。三十多年里，他们写下四十多本守岛日记，记潮汐，记风向，记来往的船。日记本的边角被海风吹得卷了起来，字却一笔一画，写得工整。", "有人问王继才：“守这么个小岛，值吗？”他说：“岛再小，也是国土。”", "2018年，王继才在岛上突发疾病，倒在了他守了三十二年的地方。妻子王仕花接过旗绳，继续升旗。她说：“他守岛，我守他；他不在了，我替他守。”", "如今，岛上的旗杆换了新的，国旗每天照常升起。海风吹过，旗子“哗啦啦”地响，像有人在说话。"], "questions": [{"q": "王继才说“岛再小，也是国土”，这句话表现了他怎样的情感？（ ）", "type": "choice", "options": ["对国土的守护和热爱", "对岛上生活的不舍", "对家人的愧疚", "对守岛工作的无奈"], "a": 0, "e": "“国土”二字直接表达了他对国家的守护和热爱。"}, {"q": "妻子说“他守岛，我守他；他不在了，我替他守”，这句话表现了什么？", "type": "open", "options": [], "a": "表现了妻子对丈夫的理解、支持和深爱，也表现了她继承丈夫守岛事业、继续守护国土的坚定。", "e": ""}, {"q": "请简要概括王继才夫妇守岛时克服的困难，至少写出三点。", "type": "open", "options": [], "a": "示例：①没有淡水，就接雨水；②没有电，点蜡烛；③台风来时浪打到门口，用绳子把彼此拴在屋里；④风大旗绳缠住，爬旗杆解绳，摔断过肋骨；⑤生活寂寞，坚持写守岛日记。", "e": ""}, {"q": "文章结尾写国旗“哗啦啦”地响，“像有人在说话”，这样写有什么好处？", "type": "open", "options": [], "a": "以景结情，把海风和国旗声写成“有人说话”，含蓄地表达对王继才的怀念与敬意，也说明守岛精神仍在延续。", "e": ""}, {"q": "作为小学生，我们可以用什么方式表达对祖国的爱？30字左右。", "type": "open", "options": [], "a": "示例：升国旗时认真行礼、唱好国歌，好好学习，长大为祖国出力。", "e": ""}]}], "essays": ["写一种心爱之物，写出它的样子、来历和它带给你的故事，表达你的喜爱之情。（第一单元）", "用“漫画”的手法写一位老师，抓住一两个特点，可以适当夸张，让人一读就笑。（第二单元）", "选一个熟悉的故事（如《猎人海力布》《龟兔赛跑》），换一个角度或结局，重新编一个故事。（第三单元）", "想象二十年后家乡的变化，列提纲，分段写。（第四单元）", "介绍一种事物（动物、植物、物品、美食均可），用上列数字、作比较、打比方、举例子。（第五单元）", "给爸爸或妈妈写一封信，说说心里话，注意书信格式。（第六单元）", "写一个你最喜欢的季节，写出景物的静态和动态。（第七单元）", "推荐一本书，写清推荐理由，举出书中的例子。（第八单元）"]};
 const LETTERS = "ABCD";
-const KEY = "wsw5_2026_state_v1";
-let state = load();
+const LS = "wsw5_2026_v2";
 
+/* ---------------- 存储 ---------------- */
 function load(){
-  try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; }
+  try{ return JSON.parse(localStorage.getItem(LS)) || {}; }catch(e){ return {}; }
 }
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+let store = load();
+store.wrong = store.wrong || {};
+store.hist = store.hist || [];
+store.cfg = store.cfg || {};
+function save(){ try{ localStorage.setItem(LS, JSON.stringify(store)); }catch(e){} }
 
-/* ---------- 工具 ---------- */
+/* ---------------- 工具 ---------------- */
 function norm(s){
-  return (s||"").toString().replace(/[\s，。、；：！？“”‘’（）()《》〈〉·—…\-_]/g,"").toLowerCase();
+  return (s||"").toString().replace(/[\s，。、；：！？“”‘’（）()《》〈〉·—…\-_.,!?;:'"]/g,"").toLowerCase();
 }
 function esc(s){
   return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
-function itemKey(secId, idx){ return secId + "#" + idx; }
-
-/* ---------- 标签 ---------- */
-const TABS = [
-  {id:"base", name:"基础题"},
-  {id:"in", name:"课内阅读"},
-  {id:"out", name:"课外阅读"},
-  {id:"wrong", name:"错题本"}
-];
-let curTab = "base";
-function renderTabs(){
-  const t = document.getElementById("tabs");
-  t.innerHTML = TABS.map(x=>`<button data-tab="${x.id}" class="${x.id===curTab?'on':''}">${x.name}</button>`).join("");
-  t.querySelectorAll("button").forEach(b=>b.onclick=()=>{curTab=b.dataset.tab;renderTabs();render();window.scrollTo({top:0});});
+function mmss(sec){
+  sec = Math.max(0, Math.round(sec));
+  const m = Math.floor(sec/60), s = sec%60;
+  return (m<10?"0":"")+m+":"+(s<10?"0":"")+s;
 }
-document.getElementById("btn-reset").onclick = ()=>{
-  if(confirm("确定清空全部答题记录吗？")){ state={}; save(); render(); }
+function shortName(n){
+  return (n||"").replace(/^课内阅读（[^）]*）\s*/,"").replace(/^课外阅读（\d+）\s*/,"").trim() || n;
+}
+function shuffle(a){
+  a = a.slice();
+  for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+/* ---------------- 题目索引 ---------------- */
+const ALL = [];
+DATA.sections.forEach(sec=>{
+  sec.items.forEach((it,i)=>{
+    ALL.push({key:"base#"+sec.id+"#"+i, kind:"base", group:"base", chapter:sec.title,
+              chapterId:sec.id, it:it, passage:null, from:""});
+  });
+});
+DATA.readings.forEach(r=>{
+  const g = r.id.indexOf("x")===0 ? "out" : "in";
+  r.questions.forEach((q,i)=>{
+    ALL.push({key:"read#"+r.id+"#"+i, kind:"read", group:g, chapter:r.title,
+              chapterId:r.id, it:q, passage:r.passage, from:r.from||""});
+  });
+});
+
+const GROUPS = {
+  all:{name:"全部", items:ALL},
+  base:{name:"基础题", items:ALL.filter(x=>x.group==="base")},
+  in:{name:"课内阅读", items:ALL.filter(x=>x.group==="in")},
+  out:{name:"课外阅读", items:ALL.filter(x=>x.group==="out")},
+  wrong:{name:"错题本", items:ALL.filter(x=>store.wrong[x.key])}
 };
 
-/* ---------- 渲染 ---------- */
+function chaptersOf(group){
+  const m = new Map();
+  ALL.filter(x=>group==="all" || x.group===group).forEach(x=>{
+    if(!m.has(x.chapterId)) m.set(x.chapterId,{id:x.chapterId,name:x.chapter,count:0});
+    m.get(x.chapterId).count++;
+  });
+  return Array.from(m.values());
+}
+
+/* ---------------- 状态 ---------------- */
+let view = "setup";       // setup | practice | result
+let tab = "practice";     // practice | browse | wrong | about
+let cfg = Object.assign({group:"all", chapters:[], count:"20", order:"random", timer:"up", minutes:20}, store.cfg||{});
+let session = null;       // {queue, i, given:{}, startedAt, left, timerId, finishedAt}
+
+/* ---------------- 计时 ---------------- */
+function startTimer(){
+  if(cfg.timer==="none") return;
+  session.tickStart = Date.now();
+  session.left = cfg.timer==="down" ? cfg.minutes*60 : 0;
+  session.timerId = setInterval(()=>{
+    if(cfg.timer==="down"){
+      session.left--;
+      if(session.left<=0){ session.left=0; stopTimer(); finish(); }
+    }else{
+      session.left = Math.round((Date.now()-session.tickStart)/1000);
+    }
+    const el = document.getElementById("timer");
+    if(el){ el.textContent = mmss(session.left); if(cfg.timer==="down" && session.left<=60) el.classList.add("warn"); }
+  },1000);
+}
+function stopTimer(){ if(session && session.timerId){ clearInterval(session.timerId); session.timerId=null; } }
+
+/* ---------------- 渲染入口 ---------------- */
 const main = document.getElementById("main");
+const TABS = [
+  {id:"practice", name:"练习"},
+  {id:"browse", name:"题目浏览"},
+  {id:"wrong", name:"错题本"},
+  {id:"about", name:"说明"}
+];
+function renderTabs(){
+  const t = document.getElementById("tabs");
+  t.innerHTML = TABS.map(x=>`<button data-tab="${x.id}" class="${x.id===tab?'on':''}">${x.name}</button>`).join("");
+  t.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    if(view==="practice"){ if(!confirm("正在练习中，确定退出吗？")) return; stopTimer(); }
+    tab = b.dataset.tab; view = "setup"; renderTabs(); render(); window.scrollTo({top:0});
+  });
+  document.getElementById("title").textContent = tab==="practice" ? "五上语文 · 在线练习" : "五上语文 · " + (TABS.find(x=>x.id===tab)||{}).name;
+}
+document.getElementById("btn-reset").onclick = ()=>{
+  if(confirm("清空全部记录（错题本、历史成绩）？")){ store = {wrong:{},hist:[],cfg:cfg}; save(); render(); }
+};
+
 function render(){
   main.innerHTML = "";
-  if(curTab==="base") renderBase();
-  else if(curTab==="in") renderReadings(DATA.readings.filter(r=>!r.id.startsWith("x")));
-  else if(curTab==="out") renderReadings(DATA.readings.filter(r=>r.id.startsWith("x")));
-  else renderWrong();
+  if(tab==="practice"){
+    if(view==="setup") renderSetup();
+    else if(view==="practice") renderPractice();
+    else renderResult();
+  } else if(tab==="browse") renderBrowse();
+  else if(tab==="wrong") renderWrong();
+  else renderAbout();
 }
 
-function renderBase(){
-  let total=0, right=0;
-  DATA.sections.forEach(sec=>{
-    const h = document.createElement("div");
-    h.className="sec-title"; h.textContent=sec.title; main.appendChild(h);
-    if(sec.tip){ const p=document.createElement("p"); p.className="sec-tip"; p.textContent=sec.tip; main.appendChild(p); }
-    sec.items.forEach((it,i)=>{
-      total++;
-      const k = itemKey(sec.id,i);
-      const st = state[k] || {};
-      if(st.done) right += st.ok?1:0;
-      main.appendChild(card(it, k, sec.id, i, st));
-    });
+/* ---------------- 设置页 ---------------- */
+function renderSetup(){
+  const wrongN = ALL.filter(x=>store.wrong[x.key]).length;
+  main.innerHTML = `
+    <h2 class="t">开始练习</h2>
+    <p class="tip">先选范围和章节，再开始。做错的题会自动进错题本。</p>
+
+    <div class="card">
+      <div class="fld">
+        <label>练习范围</label>
+        <div class="seg" id="seg-group">
+          ${["all","base","in","out","wrong"].map(g=>{
+            const names = {all:"全部", base:"基础题", "in":"课内阅读", out:"课外阅读", wrong:"只练错题"};
+            const n = g==="wrong" ? wrongN : GROUPS[g].items.length;
+            return `<button data-g="${g}" class="${cfg.group===g?'on':''}" ${n===0?'disabled':''}>${names[g]}</button>`;
+          }).join("")}
+        </div>
+      </div>
+      <div class="fld" id="fld-chapters">
+        <label>章节（不选＝全部）</label>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="fld">
+        <label>题量</label>
+        <select id="sel-count">
+          <option value="10">10 题</option><option value="20">20 题</option>
+          <option value="30">30 题</option><option value="50">50 题</option>
+          <option value="all">全部</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>顺序</label>
+        <div class="seg" id="seg-order">
+          <button data-o="random" class="${cfg.order==='random'?'on':''}">随机</button>
+          <button data-o="seq" class="${cfg.order==='seq'?'on':''}">按顺序</button>
+        </div>
+      </div>
+      <div class="fld">
+        <label>计时</label>
+        <div class="seg" id="seg-timer">
+          <button data-t="up" class="${cfg.timer==='up'?'on':''}">正计时</button>
+          <button data-t="down" class="${cfg.timer==='down'?'on':''}">倒计时</button>
+          <button data-t="none" class="${cfg.timer==='none'?'on':''}">不计时</button>
+        </div>
+      </div>
+      <div class="fld" id="fld-minutes" style="display:none">
+        <label>倒计时时长</label>
+        <div class="seg" id="seg-min">
+          <button data-m="10">10 分钟</button><button data-m="20">20 分钟</button><button data-m="30">30 分钟</button>
+        </div>
+      </div>
+      <button class="primary" id="btn-start">开 始 练 习</button>
+      <div class="row" style="margin-top:10px;justify-content:center">
+        <span class="tip" id="sum" style="margin:0"></span>
+      </div>
+    </div>
+    ${store.hist.length? `<div class="card"><div class="fld"><label>最近成绩</label>${store.hist.slice(0,5).map(h=>
+      `<div class="hist">${h.date}　${h.right}/${h.total}　用时 ${mmss(h.sec)}　${h.group}</div>`).join("")}</div></div>`:""}
+  `;
+
+  document.querySelectorAll("#seg-group button").forEach(b=>b.onclick=()=>{
+    cfg.group = b.dataset.g; cfg.chapters = []; save(); renderSetup();
   });
-  const p=document.createElement("p"); p.className="score";
-  p.textContent = `已完成 ${Object.keys(state).filter(k=>state[k].done).length} / ${total} 题`;
-  main.appendChild(p);
+  document.querySelectorAll("#seg-order button").forEach(b=>b.onclick=()=>{
+    cfg.order = b.dataset.o; save(); renderSetup();
+  });
+  document.querySelectorAll("#seg-timer button").forEach(b=>b.onclick=()=>{
+    cfg.timer = b.dataset.t; save(); renderSetup();
+  });
+  document.querySelectorAll("#seg-min button").forEach(b=>b.onclick=()=>{
+    cfg.minutes = +b.dataset.m; save(); renderSetup();
+  });
+  document.getElementById("sel-count").value = cfg.count;
+  document.getElementById("sel-count").onchange = e=>{ cfg.count = e.target.value; save(); };
+
+  // 章节 chips
+  const chips = document.getElementById("chips");
+  const chs = chaptersOf(cfg.group==="wrong" ? "all" : cfg.group);
+  const scope = cfg.group==="wrong" ? ALL.filter(x=>store.wrong[x.key]) : GROUPS[cfg.group].items;
+  const visible = new Map();
+  chs.forEach(c=>{
+    const n = scope.filter(x=>x.chapterId===c.id).length;
+    if(n>0) visible.set(c.id, {name:c.name, count:n});
+  });
+  if(cfg.group==="wrong"){ document.getElementById("fld-chapters").style.display = visible.size? "" : "none"; }
+  chips.innerHTML = Array.from(visible.entries()).map(([id,v])=>
+    `<div class="chip ${cfg.chapters.includes(id)?"on":""}" data-c="${id}">${esc(shortName(v.name))}<small>${v.count}</small></div>`
+  ).join("");
+  chips.querySelectorAll(".chip").forEach(el=>el.onclick=()=>{
+    const id = el.dataset.c;
+    if(cfg.chapters.includes(id)) cfg.chapters = cfg.chapters.filter(x=>x!==id);
+    else cfg.chapters.push(id);
+    save();
+    el.classList.toggle("on");
+    updateSum();
+  });
+
+  document.getElementById("fld-minutes").style.display = cfg.timer==="down" ? "" : "none";
+  document.querySelectorAll("#seg-min button").forEach(b=>{
+    b.classList.toggle("on", +b.dataset.m === cfg.minutes);
+  });
+
+  function candidates(){
+    let pool = cfg.group==="wrong" ? ALL.filter(x=>store.wrong[x.key]) : GROUPS[cfg.group].items;
+    if(cfg.chapters.length) pool = pool.filter(x=>cfg.chapters.includes(x.chapterId));
+    return pool;
+  }
+  function updateSum(){
+    const n = candidates().length;
+    const take = cfg.count==="all" ? n : Math.min(n, +cfg.count);
+    const el = document.getElementById("sum");
+    if(el) el.textContent = n ? `本次将练习 ${take} 题（可选 ${n} 题）` : "这个范围里没有题目";
+    const btn = document.getElementById("btn-start");
+    if(btn) btn.disabled = n===0;
+  }
+  updateSum();
+  document.getElementById("btn-start").onclick = ()=>{
+    const pool = candidates();
+    if(!pool.length) return;
+    let q = cfg.order==="random" ? shuffle(pool) : pool.slice();
+    if(cfg.count!=="all") q = q.slice(0, +cfg.count);
+    startSession(q);
+  };
 }
 
-function card(it, k, secId, idx, st){
-  const box = document.createElement("div");
-  box.className="card";
-  const q = document.createElement("p");
-  q.className="q"; q.innerHTML = `<span class="qno">${idx+1}.</span>` + esc(it.q).replace(/\n/g,"<br>");
-  box.appendChild(q);
+/* ---------------- 练习页 ---------------- */
+function startSession(queue){
+  session = {queue:queue, i:0, given:{}, startedAt:Date.now(), left:0, timerId:null, graded:{}};
+  view = "practice";
+  render();
+  startTimer();
+}
 
-  const fb = document.createElement("div"); fb.className="fb";
+function renderPractice(){
+  const s = session;
+  if(!s) { view="setup"; return render(); }
+  const cur = s.queue[s.i];
+  const it = cur.it;
+  const total = s.queue.length;
+  const pct = Math.round((s.i)/total*100);
+
+  const passage = cur.passage ? `
+    <details class="passage" ${cur.passage.length<=3?"open":""}>
+      <summary>阅读材料（点开／收起）</summary>
+      <div class="body">${cur.passage.map(p=>`<p>${esc(p)}</p>`).join("")}
+      ${cur.from?`<p style="text-indent:0;text-align:right;font-size:12.5px;color:var(--sub)">—— ${esc(cur.from)}</p>`:""}</div>
+    </details>` : "";
+
+  main.innerHTML = `
+    <div class="pstat">
+      <span>第 ${s.i+1} / ${total} 题</span>
+      <span class="timer" id="timer" style="${cfg.timer==='none'?'display:none':''}">${mmss(s.left)}</span>
+    </div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    ${passage}
+    <div class="card">
+      <p class="q"><span class="qno">${s.i+1}.</span>${esc(it.q)}</p>
+      <div id="answerArea"></div>
+      <div class="fb" id="fb"></div>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-top:4px">
+      <button class="ghost" id="btn-quit">退出</button>
+      <button class="ghost" id="btn-next" disabled>下一题 →</button>
+    </div>
+    <p class="tip" style="text-align:center">${cur.kind==="read"?"":"　"}</p>
+  `;
+
+  const area = document.getElementById("answerArea");
+  const fb = document.getElementById("fb");
+  const nextBtn = document.getElementById("btn-next");
 
   if(it.type==="choice"){
-    const wrap=document.createElement("div"); wrap.className="opts";
-    it.options.forEach((o,i)=>{
-      const d=document.createElement("div");
-      d.className="opt"; d.dataset.i=i;
-      d.innerHTML=`<span class="k">${LETTERS[i]}</span><span>${esc(o)}</span>`;
-      d.onclick=()=>{
-        if(st.done) return;
+    const wrap = document.createElement("div"); wrap.className="opts";
+    it.options.forEach((o,k)=>{
+      const d = document.createElement("div");
+      d.className = "opt"; d.dataset.k = k;
+      d.innerHTML = `<span class="k">${LETTERS[k]}</span><span>${esc(o)}</span>`;
+      d.onclick = ()=>{
+        if(fb.classList.contains("show")) return;
         wrap.querySelectorAll(".opt").forEach(x=>x.classList.remove("sel"));
         d.classList.add("sel");
-        state[k]=Object.assign({}, state[k], {pick:i});
-        save();
+        s.given[cur.key] = k;
       };
       wrap.appendChild(d);
     });
-    box.appendChild(wrap);
-    if(st.pick!==undefined){ const el=wrap.querySelector(`.opt[data-i="${st.pick}"]`); if(el) el.classList.add("sel"); }
-
-    const row=document.createElement("div"); row.className="btnrow";
-    const b=document.createElement("button"); b.className="primary"; b.textContent="检查";
-    b.onclick=()=>{
-      const pick = state[k]&&state[k].pick;
-      if(pick===undefined){ alert("先选一个答案"); return; }
-      const ok = pick===it.a;
-      state[k]={done:true, ok, pick};
-      save();
+    area.appendChild(wrap);
+    const check = document.createElement("button");
+    check.className="primary"; check.style.marginTop="12px"; check.textContent="确认答案";
+    check.onclick = ()=>{
+      const g = s.given[cur.key];
+      if(g===undefined){ alert("先选一个答案"); return; }
+      const ok = g===it.a;
+      s.graded[cur.key]=ok;
       wrap.querySelectorAll(".opt").forEach(x=>x.classList.remove("right","wrong"));
-      wrap.querySelector(`.opt[data-i="${it.a}"]`).classList.add("right");
-      if(!ok) wrap.querySelector(`.opt[data-i="${pick}"]`).classList.add("wrong");
-      fb.className="fb show "+(ok?"ok":"no");
-      fb.textContent=(ok?"✔ 正确。":"✘ 正确答案："+LETTERS[it.a]+"。")+(it.e?("　"+it.e):"");
-      b.disabled=true;
+      wrap.querySelector(`.opt[data-k="${it.a}"]`).classList.add("right");
+      if(!ok) wrap.querySelector(`.opt[data-k="${g}"]`).classList.add("wrong");
+      fb.className = "fb show " + (ok?"ok":"no");
+      fb.textContent = (ok?"✔ 正确。":"✘ 正确答案："+LETTERS[it.a]+"。") + (it.e?("　"+it.e):"");
+      check.disabled = true;
+      nextBtn.disabled = false;
+      markWrong(cur.key, !ok);
     };
-    row.appendChild(b); box.appendChild(row);
-    if(st.done){
-      wrap.querySelectorAll(".opt").forEach(x=>{
-        x.classList.remove("right","wrong");
-        if(+x.dataset.i===it.a) x.classList.add("right");
-        if(!st.ok && +x.dataset.i===st.pick) x.classList.add("wrong");
-      });
-      fb.className="fb show "+(st.ok?"ok":"no");
-      fb.textContent=(st.ok?"✔ 正确。":"✘ 正确答案："+LETTERS[it.a]+"。")+(it.e?("　"+it.e):"");
-      b.disabled=true;
-    }
-    box.appendChild(fb);
+    area.appendChild(check);
   } else if(it.type==="fill"){
-    const inp=document.createElement("input"); inp.className="fill"; inp.placeholder="在这里写答案";
-    inp.value = (st.val||"");
-    inp.oninput=()=>{ state[k]=Object.assign({},state[k],{val:inp.value}); save(); };
-    box.appendChild(inp);
-    const row=document.createElement("div"); row.className="btnrow";
-    const b=document.createElement("button"); b.className="primary"; b.textContent="检查";
-    b.onclick=()=>{
+    const inp = document.createElement("input");
+    inp.className="fill"; inp.placeholder="在这里写答案";
+    area.appendChild(inp);
+    const check = document.createElement("button");
+    check.className="primary"; check.style.marginTop="12px"; check.textContent="确认答案";
+    check.onclick = ()=>{
+      if(!inp.value.trim()){ alert("先写答案"); return; }
       const ok = norm(inp.value)===norm(it.a);
-      state[k]={done:true, ok, val:inp.value};
-      save();
+      s.graded[cur.key]=ok;
+      s.given[cur.key]=inp.value;
       fb.className="fb show "+(ok?"ok":"no");
       fb.textContent=(ok?"✔ 正确。":"✘ 参考答案："+it.a+"　")+(it.e||"");
-      b.disabled=true;
+      check.disabled=true; inp.disabled=true;
+      nextBtn.disabled=false;
+      markWrong(cur.key, !ok);
     };
-    row.appendChild(b); box.appendChild(row);
-    if(st.done){
-      fb.className="fb show "+(st.ok?"ok":"no");
-      fb.textContent=(st.ok?"✔ 正确。":"✘ 参考答案："+it.a+"　")+(it.e||"");
-      b.disabled=true;
-    }
-    box.appendChild(fb);
+    area.appendChild(check);
   } else {
-    const ta=document.createElement("textarea"); ta.className="open"; ta.placeholder="把答案写下来，再点“看参考答案”对照";
-    ta.value=(st.val||"");
-    ta.oninput=()=>{ state[k]=Object.assign({},state[k],{val:ta.value}); save(); };
-    box.appendChild(ta);
-    const row=document.createElement("div"); row.className="btnrow";
-    const b=document.createElement("button"); b.className="ghost"; b.textContent="看参考答案";
-    b.onclick=()=>{ fb.className="fb show ref"; fb.textContent="参考答案："+it.a; };
-    row.appendChild(b); box.appendChild(row);
-    box.appendChild(fb);
+    const ta = document.createElement("textarea");
+    ta.className="open"; ta.placeholder="先自己写一写，再看参考答案（不写也会算答错）";
+    area.appendChild(ta);
+    const b1 = document.createElement("button");
+    b1.className="ghost"; b1.style.marginTop="10px"; b1.textContent="看参考答案";
+    b1.onclick = ()=>{
+      fb.className="fb show ref";
+      fb.textContent="参考答案："+it.a;
+      gradeRow();
+    };
+    area.appendChild(b1);
+    const row = document.createElement("div"); row.className="row"; row.style.marginTop="10px";
+    area.appendChild(row);
+    function gradeRow(){
+      if(row.dataset.done) return;
+      row.dataset.done="1";
+      row.innerHTML = "";
+      const ok = document.createElement("button");
+      ok.className="primary"; ok.style.flex="1"; ok.textContent="我写对了";
+      ok.onclick = ()=>{ s.graded[cur.key]=true; s.given[cur.key]=ta.value; markWrong(cur.key,false);
+        row.innerHTML="<span class='tip'>已记为答对</span>"; nextBtn.disabled=false; };
+      const no = document.createElement("button");
+      no.className="ghost"; no.style.flex="1"; no.textContent="没写对";
+      no.onclick = ()=>{ s.graded[cur.key]=false; s.given[cur.key]=ta.value; markWrong(cur.key,true);
+        row.innerHTML="<span class='tip'>已记为答错，已进错题本</span>"; nextBtn.disabled=false; };
+      row.appendChild(ok); row.appendChild(no);
+    }
   }
-  return box;
+
+  nextBtn.onclick = ()=>{
+    if(s.i+1 >= s.queue.length){ finish(); }
+    else { s.i++; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+  };
+  document.getElementById("btn-quit").onclick = ()=>{
+    if(confirm("确定退出本次练习？已答的题会保存到错题本。")){ stopTimer(); view="setup"; render(); }
+  };
+  document.getElementById("timer").textContent = mmss(s.left);
 }
 
-function renderReadings(list){
-  list.forEach(r=>{
-    const pass=document.createElement("div"); pass.className="passage";
-    const h=document.createElement("h3"); h.textContent=r.title; pass.appendChild(h);
-    r.passage.forEach(p=>{ const el=document.createElement("p"); el.textContent=p; pass.appendChild(el); });
-    if(r.from){ const f=document.createElement("p"); f.className="from"; f.textContent="—— "+r.from; pass.appendChild(f); }
-    main.appendChild(pass);
-    r.questions.forEach((q,i)=>{
-      const it={q:q.q,type:q.type,options:q.options,a:q.a,e:q.e};
-      main.appendChild(card(it, itemKey(r.id,i), r.id, i, state[itemKey(r.id,i)]||{}));
+function markWrong(key, isWrong){
+  if(isWrong) store.wrong[key] = 1;
+  else delete store.wrong[key];
+  save();
+}
+
+/* ---------------- 结果页 ---------------- */
+function finish(){
+  stopTimer();
+  const s = session;
+  const total = s.queue.length;
+  const answeredCount = Object.keys(s.graded).length;
+  // 没作答的按答错处理，一并进错题本
+  s.queue.forEach(function(x){ if(s.graded[x.key]===undefined){ s.graded[x.key]=false; store.wrong[x.key]=1; } });
+  const right = s.queue.filter(function(x){ return s.graded[x.key]===true; }).length;
+  const sec = Math.round((Date.now()-s.startedAt)/1000);
+  const groupName = GROUPS[cfg.group] ? GROUPS[cfg.group].name : "全部";
+  s.sec = sec; s.right = right; s.total = total; s.answered = answeredCount;
+  store.hist.unshift({date:new Date().toLocaleString("zh-CN",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}),
+                      right:right, total:total, sec:sec, group:groupName});
+  store.hist = store.hist.slice(0,30);
+  save();
+  view = "result";
+  renderResult();
+}
+
+function renderResult(){
+  const s = session;
+  if(!s){ view="setup"; render(); return; }
+  const total = s.total || s.queue.length;
+  const answered = s.answered || 0;
+  const right = s.right || 0;
+  const sec = s.sec || 0;
+  const rate = total ? Math.round(right/total*100) : 0;
+  main.innerHTML = `
+    <h2 class="t">本次结果</h2>
+    <p class="tip">共 ${total} 题${answered<total?`，作答 ${answered} 题（未答按错计入错题本）`:"，全部作答"}</p>
+    <div class="res">
+      <div><b>${right}</b><span>答对</span></div>
+      <div><b>${mmss(sec)}</b><span>用时</span></div>
+      <div><b>${rate}%</b><span>正确率</span></div>
+    </div>
+    <div class="card">
+      <div class="fld"><label>逐题回顾</label>
+        <div class="rlist" id="rlist"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom:12px">
+      <button class="primary" id="btn-again" style="flex:1">再练一组</button>
+      <button class="ghost" id="btn-wrong" style="flex:1">只练这次错的</button>
+    </div>
+    <p class="tip" style="text-align:center">错题已自动收进「错题本」，下次可以单选它练。</p>
+  `;
+  const list = document.getElementById("rlist");
+  s.queue.forEach(function(cur){
+    const ok = s.graded[cur.key];
+    const d = document.createElement("div");
+    d.className = "ritem " + (ok===true?"ok":"no");
+    const ansTxt = cur.it.type==="choice" ? LETTERS[cur.it.a] + ". " + cur.it.options[cur.it.a] : cur.it.a;
+    d.innerHTML = '<div class="mark">'+(ok===true?"✔":"✘")+'</div>'
+      + '<div class="txt">'+esc(cur.it.q)+'<div class="ans">答案：'+esc(String(ansTxt).slice(0,80))+'</div></div>';
+    list.appendChild(d);
+  });
+  document.getElementById("btn-again").onclick = function(){ view="setup"; session=null; render(); };
+  document.getElementById("btn-wrong").onclick = function(){
+    const q = s.queue.filter(function(x){ return s.graded[x.key]===false; });
+    if(!q.length){ alert("这次没有错题，厉害！"); return; }
+    startSession(q);
+  };
+  window.scrollTo({top:0});
+}
+
+/* ---------------- 浏览 ---------------- */
+function renderBrowse(){
+  main.innerHTML = `<h2 class="t">题目浏览</h2><p class="tip">看题 + 看答案，不做判分。要练题请到「练习」。</p>`;
+  DATA.sections.forEach(sec=>{
+    const h = document.createElement("div"); h.className="card";
+    h.innerHTML = `<div class="fld"><label>${esc(sec.title)}</label></div>`;
+    sec.items.forEach((it,i)=>{
+      const d = document.createElement("div");
+      d.style.padding = "8px 0"; d.style.borderBottom = "1px dashed var(--line)";
+      const ans = it.type==="choice" ? LETTERS[it.a] + ". " + it.options[it.a] : it.a;
+      d.innerHTML = `<div>${i+1}. ${esc(it.q)}</div>
+        ${it.type==="choice"?`<div class="tip" style="margin:2px 0 0">${it.options.map((o,k)=>LETTERS[k]+". "+esc(o)).join("　")}</div>`:""}
+        <div class="ans" style="font-size:12.5px;color:var(--green);margin-top:3px;display:none">答案：${esc(String(ans))}${it.e?"　"+esc(it.e):""}</div>
+        <button class="ghost" style="margin-top:6px;font-size:12px;padding:4px 10px">显示答案</button>`;
+      const btn = d.querySelector("button"), ansEl = d.querySelector(".ans");
+      btn.onclick = ()=>{ ansEl.style.display="block"; btn.style.display="none"; };
+      h.appendChild(d);
     });
+    main.appendChild(h);
   });
 }
 
+/* ---------------- 错题本 ---------------- */
 function renderWrong(){
-  const items=[];
-  DATA.sections.forEach(sec=>sec.items.forEach((it,i)=>{
-    const st=state[itemKey(sec.id,i)];
-    if(st&&st.done&&!st.ok) items.push([sec.title, it, sec.id, i]);
-  }));
-  DATA.readings.forEach(r=>r.questions.forEach((q,i)=>{
-    const st=state[itemKey(r.id,i)];
-    if(st&&st.done&&!st.ok) items.push([r.title, {q:q.q,type:q.type,options:q.options,a:q.a,e:q.e}, r.id, i]);
-  }));
-  if(!items.length){
-    main.innerHTML = `<div class="empty">还没有错题。做完题、点过“检查”之后，错的题会自动收集到这里。</div>`;
+  const list = ALL.filter(x=>store.wrong[x.key]);
+  main.innerHTML = `<h2 class="t">错题本（${list.length}）</h2>
+    <p class="tip">做错的题会自动进来，做对一次就移出。</p>`;
+  if(!list.length){
+    main.innerHTML += `<div class="empty">还没有错题。<br>去「练习」做一组吧。</div>`;
     return;
   }
-  const h=document.createElement("div"); h.className="sec-title"; h.textContent=`错题本（${items.length} 题）`;
-  main.appendChild(h);
-  items.forEach(([src,it,secId,idx])=>{
-    const k=itemKey(secId,idx);
-    const box=card({q:"【"+src+"】"+it.q, type:it.type, options:it.options, a:it.a, e:it.e}, k, secId, idx, {});
-    main.appendChild(box);
+  const byCh = new Map();
+  list.forEach(x=>{
+    if(!byCh.has(x.chapter)) byCh.set(x.chapter, []);
+    byCh.get(x.chapter).push(x);
   });
-  const row=document.createElement("div"); row.className="btnrow";
-  const b=document.createElement("button"); b.className="ghost"; b.textContent="清空错题记录";
-  b.onclick=()=>{ if(confirm("清空错题记录？")){ Object.keys(state).forEach(k=>{ if(state[k]&&state[k].done&&!state[k].ok) delete state[k]; }); save(); render(); } };
+  byCh.forEach((arr, name)=>{
+    const c = document.createElement("div"); c.className="card";
+    c.innerHTML = `<div class="fld"><label>${esc(name)}　${arr.length} 题</label></div>`;
+    arr.forEach(x=>{
+      const d = document.createElement("div");
+      d.style.padding="8px 0"; d.style.borderBottom="1px dashed var(--line)";
+      const ans = x.it.type==="choice" ? LETTERS[x.it.a]+". "+x.it.options[x.it.a] : x.it.a;
+      d.innerHTML = `<div>${esc(x.it.q)}</div>
+        <div style="font-size:12.5px;color:var(--green);margin-top:3px">答案：${esc(String(ans))}</div>
+        ${x.it.e?`<div style="font-size:12.5px;color:var(--sub);margin-top:2px">${esc(x.it.e)}</div>`:""}`;
+      c.appendChild(d);
+    });
+    main.appendChild(c);
+  });
+  const row = document.createElement("div"); row.className="row";
+  const b = document.createElement("button"); b.className="primary"; b.textContent="只练这些错题";
+  b.onclick = ()=>{ startSession(shuffle(list)); tab="practice"; renderTabs(); };
   row.appendChild(b); main.appendChild(row);
 }
 
-renderTabs(); render();
+/* ---------------- 说明 ---------------- */
+function renderAbout(){
+  main.innerHTML = `
+    <h2 class="t">说明</h2>
+    <div class="card">
+      <p><b>范围怎么选</b><br>基础题按题型分小节（字音、字形、词语、句子、积累）；课内阅读按课文分；课外阅读按篇目分。选「全部」就是混合练。</p>
+      <p><b>题量与顺序</b><br>随机＝每次都打乱，适合检测；按顺序＝按章节顺序，适合过一遍。</p>
+      <p><b>计时</b><br>正计时看自己用了多久；倒计时到 0 自动收卷；不计时就慢慢做。</p>
+      <p><b>错题本</b><br>选择题、填空题答错，或简答题自评「没写对」，都会进错题本；同一题做对一次就移出。</p>
+      <p><b>记录</b><br>成绩存在本机浏览器，换设备或清缓存会丢。</p>
+    </div>
+    <div class="card">
+      <p><b>题目来源</b><br>按小学期末考试常见题型自编，共 ${ALL.length} 题；课外阅读为原创短文。</p>
+      <p style="color:var(--sub);font-size:13px">版本 v2 · 2026 秋新版五上</p>
+    </div>`;
+}
+
+/* ---------------- 启动 ---------------- */
+renderTabs();
+render();
 </script>
 </body>
 </html>
